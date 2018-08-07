@@ -9,11 +9,23 @@ export class ConfiguratorComponent implements OnInit {
 
   @Output() closeMenu = new EventEmitter<boolean>();
   private menuOpened: boolean;
+  private tEntity: string;
+  private tValue: number;
+
+  private aEntity: string;
+  private aAttribute: string;
+  private aValue: number;
 
   constructor() { }
 
   ngOnInit() {
     this.menuOpened = false;
+    this.tEntity = '';
+    this.tValue = 0;
+
+    this.aEntity = '';
+    this.aAttribute = '';
+    this.aValue = 0;
   }
 
   public setMenu() {

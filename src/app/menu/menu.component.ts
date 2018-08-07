@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.selected = 0;
-    this.menuItems = ['Adaptation Rules', 'Triggers', 'Actions'];
+    this.menuItems = ['New Rule', 'Adaptation Rules', 'Triggers', 'Actions'];
     this.menuOpened = false;
   }
 
