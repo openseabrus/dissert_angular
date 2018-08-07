@@ -1,3 +1,7 @@
-<div class="container">
-  <contact-list></contact-list>
+<div id="layout" [ngClass]="{active: menuOpened}">
+  
+  <app-menu (openMenu)="toggleMenu($event)"></app-menu>
+
+  <app-configurator></app-configurator>
+  
 </div>
