@@ -2,6 +2,6 @@
   
   <app-menu (openMenu)="toggleMenu($event)"></app-menu>
 
-  <app-configurator></app-configurator>
+  <app-configurator (closeMenu)="toggleMenu(false)"></app-configurator>
   
 </div>

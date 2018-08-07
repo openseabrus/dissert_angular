@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.selected = 0;
-    this.menuItems = ["Adaptation Rules", "Triggers", "Actions"];
+    this.menuItems = ['Adaptation Rules', 'Triggers', 'Actions'];
     this.menuOpened = false;
   }
 
@@ -27,15 +27,18 @@ export class MenuComponent implements OnInit {
 
   public getClasses(index: number) {
     return {
-      "pure-menu-item": true,
-      "pure-menu-selected": this.selected == index
+      'pure-menu-item': true,
+      'pure-menu-selected': this.selected === index
     };
   }
 
   public toggleMenu(e: Event) {
     e.preventDefault();
-    this.menuOpened = !this.menuOpened;
-    this.openMenu.next(this.menuOpened);
+    this.openMenu.next(!this.menuOpened);
+  }
+
+  public appToggleMenu(state: boolean) {
+    this.menuOpened = state;
   }
 
 }

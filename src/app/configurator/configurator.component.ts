@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-configurator',
@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfiguratorComponent implements OnInit {
 
+  @Output() closeMenu = new EventEmitter<boolean>();
+  private menuOpened: boolean;
+
   constructor() { }
 
   ngOnInit() {
+    this.menuOpened = false;
+  }
+
+  public setMenu() {
+    this.closeMenu.next();
+  }
+
+  public appSetMenu(state: boolean) {
+    this.menuOpened = state;
   }
 
 }
