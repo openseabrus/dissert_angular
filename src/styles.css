@@ -94,6 +94,7 @@ The content `<div>` is where all your content goes.
   margin: 0.2em 0;
   font-size: 3em;
   font-weight: 300;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .header h2 {
@@ -101,12 +102,14 @@ The content `<div>` is where all your content goes.
   color: #ccc;
   padding: 0;
   margin-top: 0;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .content-subhead {
   margin: 50px 0 20px 0;
   font-weight: 300;
   color: #888;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /*
@@ -127,6 +130,7 @@ appears on the left side of the page.
   background: #191818;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /*
