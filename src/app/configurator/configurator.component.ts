@@ -1,9 +1,14 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ConfiguratorService } from './configurator.service';
+import { Rule } from '../rules/rule';
+import { Trigger } from '../rules/trigger';
+import { Action } from '../rules/action';
 
 @Component({
   selector: 'app-configurator',
   templateUrl: './configurator.component.html',
-  styleUrls: ['./configurator.component.css']
+  styleUrls: ['./configurator.component.css'],
+  providers: [ConfiguratorService]
 })
 export class ConfiguratorComponent implements OnInit {
 
@@ -16,7 +21,7 @@ export class ConfiguratorComponent implements OnInit {
   private aAttribute: string;
   private aValue: number;
 
-  constructor() { }
+  constructor(private config: ConfiguratorService) { }
 
   ngOnInit() {
     this.menuOpened = false;
@@ -34,6 +39,27 @@ export class ConfiguratorComponent implements OnInit {
 
   public appSetMenu(state: boolean) {
     this.menuOpened = state;
+  }
+
+  public submitRule() {
+    let r = new Rule();
+    let t = new Trigger();
+    let a = new Action();
+
+    t.entity = this.tEntity;
+    t.operator = 'eq';
+    t.value = this.tValue;
+
+    a.entity = this.aEntity;
+    a.attribute = this.aAttribute;
+    a.value = this.aValue;
+
+    r.trigger = t;
+    r.action = a;
+
+    console.log(r);
+    //this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
+    this.config.createRule(r).subscribe((res) => console.log(res));
   }
 
 }

@@ -5,6 +5,5 @@ export class Contact {
     phone: {
       mobile: string;
       work: string;
-    }
+    };
   }
-  
