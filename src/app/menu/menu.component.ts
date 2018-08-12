@@ -1,19 +1,26 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MenuCloserService } from './menu-closer/menu-closer.service';
+import { Subscription } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
+  providers: []
 })
-export class MenuComponent implements OnInit {
-
-  @Output() openMenu = new EventEmitter<boolean>();
+export class MenuComponent implements OnInit, OnDestroy {
 
   selected: number;
   menuItems: string[];
   menuOpened: boolean;
+  subscription: Subscription;
 
-  constructor() { }
+  constructor(private menuCloserService: MenuCloserService) {
+    this.subscription = menuCloserService.contentClick$.subscribe(
+      () => {
+        this.toggleMenu(null, false);
+      });
+  }
 
   ngOnInit() {
     this.selected = 0;
@@ -32,14 +39,18 @@ export class MenuComponent implements OnInit {
     };
   }
 
-  public toggleMenu(e: Event) {
-    e.preventDefault();
-    // this.openMenu.next(!this.menuOpened);
-    this.appToggleMenu(!this.menuOpened);
+  public toggleMenu(e: Event, state: boolean) {
+    if (e) { e.preventDefault(); }
+    if (state != null) {
+      this.menuOpened = state;
+    } else {
+      this.menuOpened = !this.menuOpened;
+    }
   }
 
-  public appToggleMenu(state: boolean) {
-    this.menuOpened = state;
+  ngOnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
+    this.subscription.unsubscribe();
   }
-
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfiguratorService } from './configurator.service';
 import { Rule } from '../rules/rule';
 import { Trigger } from '../rules/trigger';
 import { Action } from '../rules/action';
+import { MenuCloserService } from '../menu-closer/menu-closer.service';
 
 @Component({
   selector: 'app-configurator',
@@ -12,7 +13,6 @@ import { Action } from '../rules/action';
 })
 export class ConfiguratorComponent implements OnInit {
 
-  @Output() closeMenu = new EventEmitter<boolean>();
   private menuOpened: boolean;
   private tEntity: string;
   private tValue: number;
@@ -21,7 +21,7 @@ export class ConfiguratorComponent implements OnInit {
   private aAttribute: string;
   private aValue: number;
 
-  constructor(private config: ConfiguratorService) { }
+  constructor(private config: ConfiguratorService, private menuCloserService: MenuCloserService) { }
 
   ngOnInit() {
     this.menuOpened = false;
@@ -34,11 +34,7 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   public setMenu() {
-    this.closeMenu.next();
-  }
-
-  public appSetMenu(state: boolean) {
-    this.menuOpened = state;
+    this.menuCloserService.contentClick();
   }
 
   public submitRule() {
