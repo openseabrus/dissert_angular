@@ -1,18 +1,24 @@
-<!-- Menu toggle -->
-<a href="#menu" id="menuLink" class="menu-link" (click)="toggleMenu($event)" [ngClass]="{active: menuOpened}">
-  <!-- Hamburger icon -->
-  <span></span>
-</a>
+<div id="layout" [ngClass]="{active: menuOpened}">
+  
+  <!-- Menu toggle -->
+  <a href="#menu" id="menuLink" class="menu-link" (click)="toggleMenu($event)" [ngClass]="{active: menuOpened}">
+    <!-- Hamburger icon -->
+    <span></span>
+  </a>
 
-<div id="menu" [ngClass]="{active: menuOpened}">
-  <div class="pure-menu custom-restricted-width">
-    <a class="pure-menu-heading" href="#">Configuration</a>
+  <div id="menu" [ngClass]="{active: menuOpened}">
+    <div class="pure-menu custom-restricted-width">
+      <a class="pure-menu-heading" href="#">Configuration</a>
 
-    <!-- <li (click)="select('services')" [ngClass]="{'pure-menu-selected': 'selected == null'}" class="pure-menu-item menu-item-divided"> -->
-    <ul class="pure-menu-list">
-      <li *ngFor="let item of menuItems; let i = index" (click)="selectMenu(i)" [ngClass]="getClasses(i)">
-        <a href="#" class="pure-menu-link">{{item}}</a>
-      </li>
-    </ul>
+      <!-- <li (click)="select('services')" [ngClass]="{'pure-menu-selected': 'selected == null'}" class="pure-menu-item menu-item-divided"> -->
+      <ul class="pure-menu-list">
+        <li *ngFor="let item of menuItems; let i = index" (click)="selectMenu(i)" [ngClass]="getClasses(i)">
+          <a href="" class="pure-menu-link">{{item}}</a>
+        </li>
+      </ul>
+    </div>
   </div>
+  
+  <router-outlet></router-outlet>
+
 </div>
