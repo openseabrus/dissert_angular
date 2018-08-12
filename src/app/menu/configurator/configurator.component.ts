@@ -42,9 +42,9 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   public submitRule() {
-    let r = new Rule();
-    let t = new Trigger();
-    let a = new Action();
+    const r = new Rule();
+    const t = new Trigger();
+    const a = new Action();
 
     t.entity = this.tEntity;
     t.operator = 'eq';
@@ -58,7 +58,7 @@ export class ConfiguratorComponent implements OnInit {
     r.action = a;
 
     console.log(r);
-    //this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
+    // this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
     this.config.createRule(r).subscribe((res) => console.log(res));
   }
 

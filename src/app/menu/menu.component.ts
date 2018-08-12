@@ -34,7 +34,8 @@ export class MenuComponent implements OnInit {
 
   public toggleMenu(e: Event) {
     e.preventDefault();
-    this.openMenu.next(!this.menuOpened);
+    // this.openMenu.next(!this.menuOpened);
+    this.appToggleMenu(!this.menuOpened);
   }
 
   public appToggleMenu(state: boolean) {

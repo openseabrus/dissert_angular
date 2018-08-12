@@ -113,3 +113,10 @@ app.delete("/api/contacts/:id", function(req, res) {
     }
   });
 });
+
+
+// 404 catch 
+app.all('*', (req, res) => {
+  console.log(`[TRACE] Server 404 request: ${req.originalUrl}`);
+  res.status(200).sendFile('index.html', { root: __dirname + "/dist/" });
+});
