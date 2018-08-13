@@ -59,7 +59,9 @@ app.get("/api/rules", function(req, res) {
 
 app.post("/api/rules", function(req, res) {
   var newRule = req.body;
-  newRule.createDate = new Date();
+  newRule.createDate = new Date().toLocaleString('en-US', {
+    timeZone: 'Europe/Lisbon'
+  });
 
   if (!req.body.trigger || !req.body.action) {
     handleError(res, "Invalid user input", "Must provide a trigger and action.", 400);

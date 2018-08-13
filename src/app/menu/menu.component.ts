@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuCloserService } from './menu-closer/menu-closer.service';
-import { Subscription } from '../../../node_modules/rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +11,7 @@ import { Subscription } from '../../../node_modules/rxjs';
 export class MenuComponent implements OnInit, OnDestroy {
 
   selected: number;
-  menuItems: string[];
+  menuItems: any[];
   menuOpened: boolean;
   subscription: Subscription;
 
@@ -24,7 +24,24 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selected = 0;
-    this.menuItems = ['New Rule', 'Adaptation Rules', 'Triggers', 'Actions'];
+    this.menuItems = [
+      {
+        name: 'New Rule',
+        route: 'rules/new'
+      },
+      {
+        name: 'Adaptation Rules',
+        route: 'rules'
+      },
+      {
+        name: 'Triggers',
+        route: 'triggers'
+      },
+      {
+        name: 'Actions',
+        route: 'actions'
+      }
+    ];
     this.menuOpened = false;
   }
 

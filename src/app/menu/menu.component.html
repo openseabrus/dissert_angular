@@ -12,8 +12,9 @@
 
       <!-- <li (click)="select('services')" [ngClass]="{'pure-menu-selected': 'selected == null'}" class="pure-menu-item menu-item-divided"> -->
       <ul class="pure-menu-list">
-        <li *ngFor="let item of menuItems; let i = index" (click)="selectMenu(i)" [ngClass]="getClasses(i)">
-          <a href="" class="pure-menu-link">{{item}}</a>
+        <li *ngFor="let item of menuItems; let i = index" (click)="selectMenu(i)" class="pure-menu-item" routerLinkActive="pure-menu-selected" [routerLinkActiveOptions]="{exact:
+          true}">
+          <a routerLink="/{{item.route}}" class="pure-menu-link">{{item.name}}</a>
         </li>
       </ul>
     </div>
