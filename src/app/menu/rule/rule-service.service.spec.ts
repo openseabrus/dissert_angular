@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { RuleService } from './rule.service';
+import { RuleService } from './rule-service.service';
 
 describe('RuleService', () => {
   beforeEach(() => {

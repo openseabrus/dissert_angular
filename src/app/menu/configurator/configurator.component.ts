@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfiguratorService } from './configurator.service';
-import { Rule } from '../rules/rule';
-import { Trigger } from '../rules/trigger';
-import { Action } from '../rules/action';
+import { RuleService } from '../rule/rule-service.service';
+import { Rule } from '../rule/rule';
+import { Trigger } from '../rule/trigger';
+import { Action } from '../rule/action';
 import { MenuCloserService } from '../menu-closer/menu-closer.service';
 
 @Component({
   selector: 'app-configurator',
   templateUrl: './configurator.component.html',
   styleUrls: ['./configurator.component.css'],
-  providers: [ConfiguratorService]
+  providers: [RuleService]
 })
 export class ConfiguratorComponent implements OnInit {
 
@@ -21,7 +21,7 @@ export class ConfiguratorComponent implements OnInit {
   private aAttribute: string;
   private aValue: number;
 
-  constructor(private config: ConfiguratorService, private menuCloserService: MenuCloserService) { }
+  constructor(private config: RuleService, private menuCloserService: MenuCloserService) { }
 
   ngOnInit() {
     this.menuOpened = false;
