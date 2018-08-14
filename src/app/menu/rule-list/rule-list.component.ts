@@ -10,11 +10,15 @@ import { RuleService } from '../rule/rule-service.service';
 export class RuleListComponent implements OnInit {
 
   rules: Rule[];
+  selectedRule: Rule;
 
   constructor(private ruleService: RuleService) { }
 
   ngOnInit() {
     this.ruleService.getRules().subscribe(resp => this.rules = resp);
+    if (this.rules) {
+      this.selectedRule = this.rules[0];
+    }
   }
 
 }
