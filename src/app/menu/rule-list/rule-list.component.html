@@ -8,15 +8,15 @@
       <div class="pure-u-1-4 rule" *ngFor="let rule of rules">
         <div>
           <h4>Trigger</h4>
-          <h5>Entity: {{rule.trigger.entity}}</h5>
-          <h5>Operator: {{rule.trigger.operator}}</h5>
-          <h5>Value: {{rule.trigger.value}}</h5>
+          <p>Entity: {{rule.trigger.entity}}</p>
+          <p>Operator: {{rule.trigger.operator}}</p>
+          <p>Value: {{rule.trigger.value}}</p>
 
           <h4>Action</h4>
-          <h5>Entity: {{rule.action.entity}}</h5>
-          <h5>Attribute: {{rule.action.attribute}}</h5>
-          <h5>Value: {{rule.action.value}}</h5>
-          <h5>Created: {{rule.createDate | date: 'd MMM yyyy, HH:mm'}}</h5>
+          <p>Entity: {{rule.action.entity}}</p>
+          <p>Attribute: {{rule.action.attribute}}</p>
+          <p>Value: {{rule.action.value}}</p>
+          <p>Created: {{rule.createDate | date: 'd MMM yyyy, HH:mm'}}</p>
         </div>
       </div>
     </div>
