@@ -76,6 +76,18 @@ app.post("/api/rules", function(req, res) {
   }
 });
 
+app.get("/config", function(req, res) {
+  db.collection(RULES_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get rules.");
+    } else {
+      res.attachment("config.json");
+      res.type("json");
+      res.send(docs);
+    }
+  }
+)});
+
 /*  "/api/contacts/:id"
  *    GET: find contact by id
  *    PUT: update contact by id
