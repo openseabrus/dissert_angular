@@ -5,8 +5,7 @@
 
   <div *ngIf="rules" class="content">
     <div class="pure-g">
-      <div class="pure-u-1-4 rule" *ngFor="let rule of rules">
-        <div>
+      <div class="pure-u-1-4" *ngFor="let rule of rules">
           <h4>Trigger</h4>
           <p>Entity: {{rule.trigger.entity}}</p>
           <p>Operator: {{rule.trigger.operator}}</p>
@@ -17,7 +16,6 @@
           <p>Attribute: {{rule.action.attribute}}</p>
           <p>Value: {{rule.action.value}}</p>
           <p>Created: {{rule.createDate | date: 'd MMM yyyy, HH:mm'}}</p>
-        </div>
       </div>
     </div>
   </div>
