@@ -76,6 +76,16 @@ app.post("/api/rules", function(req, res) {
   }
 });
 
+app.delete("/api/rules/:id", function(req, res) {
+  db.collection(RULES_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete rule");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
+
 app.get("/config", function(req, res) {
   db.collection(RULES_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {

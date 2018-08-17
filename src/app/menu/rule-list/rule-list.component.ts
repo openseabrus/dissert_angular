@@ -21,4 +21,12 @@ export class RuleListComponent implements OnInit {
     }
   }
 
+  deleteRule(index: number) {
+    if (index >= 0 && index < this.rules.length) {
+      this.ruleService.deleteRule(this.rules[index]._id).subscribe(
+        success => { this.rules.splice(index, 1); console.log('Success'); },
+        error => console.log('errooor'));
+    }
+  }
+
 }

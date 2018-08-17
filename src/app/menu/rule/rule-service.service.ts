@@ -35,35 +35,6 @@ export class RuleService {
     );
   }
 
-  /*
-  map(obj => {
-          return obj.
-          console.log(obj);
-          const t = obj['trigger'];
-          const trigger = new Trigger(t['entity'], t['operator'], t['value']);
-
-          const a = obj['action'];
-          const action = new Action(a['entity'], a['attribute'], a['value']);
-          return new Rule(trigger, action, obj['createDate'], obj['_id']);
-        })
-  [
-    {
-        "_id": "5b6daded9df9182414d2c148",
-        "trigger": {
-            "entity": "map",
-            "operator": "eq",
-            "value": 20
-        },
-        "action": {
-            "entity": "map",
-            "attribute": "zoom",
-            "value": 15
-        },
-        "createDate": "2018-08-10T15:23:25.125Z"
-    }
-]
-  */
-
   // post("/api/rules")
   createRule(newRule: Rule): Observable<void | any> {
     const httpOptions = {
@@ -79,6 +50,13 @@ export class RuleService {
                .toPromise()
                .then(response => response)
                .catch(this.handleError); */
+  }
+
+  deleteRule(_id: string): Observable<{}> {
+    const url = `${this.rulesURL}/${_id}`;
+    return this.http.delete(url).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

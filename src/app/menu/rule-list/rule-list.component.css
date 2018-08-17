@@ -1,0 +1,12 @@
+.rule {
+    border: 1px solid #FF4136;
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+.center {
+    margin: auto;
+    display: flex;
+}
