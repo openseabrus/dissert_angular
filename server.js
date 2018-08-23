@@ -5,6 +5,7 @@ var ObjectID = mongodb.ObjectID;
 
 var CONTACTS_COLLECTION = "contacts";
 var RULES_COLLECTION = "rules";
+var ENTITIES_COLLECTION = "entities";
 
 var app = express();
 app.use(bodyParser.json());
@@ -82,6 +83,25 @@ app.delete("/api/rules/:id", function(req, res) {
       handleError(res, err.message, "Failed to delete rule");
     } else {
       res.status(200).json(req.params.id);
+    }
+  });
+});
+
+
+
+
+
+/*  "/api/entities"
+ *    GET: finds all entities
+ *    POST: creates a new entity
+ */
+
+app.get("/api/entities", function(req, res) {
+  db.collection(ENTITIES_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get entites.");
+    } else {
+      res.status(200).json(docs);
     }
   });
 });

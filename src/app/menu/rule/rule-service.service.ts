@@ -24,7 +24,6 @@ export class RuleService {
     };
     return this.http.get<Array<any>>(this.rulesURL).pipe(
       map(obj => obj.map( o => {
-        console.log(o);
         const t = o['trigger'];
         const trigger = new Trigger(t['entity'], t['operator'], t['value']);
 
