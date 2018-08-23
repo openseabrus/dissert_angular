@@ -12,56 +12,76 @@
         <legend>Trigger</legend>
 
         <div class="pure-g">
-          <div class="pure-u-1 pure-u-md-1-3">
-            <label for="trigger-entity">Entity</label>
-            <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map">
+          <div class="pure-u-1 pure-u-md-1-3 auto">
+            <div class="pure-u-23-24">
+              <label for="trigger-entity">Entity</label>
+              <!-- <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map"> -->
+              <select id="trigger-entity" name="trigger-entity" [(ngModel)]="selectedEntity" (ngModelChange)="changeEntity($event)" class="pure-u-1">
+                <option *ngFor="let entity of entities" [ngValue]="entity">{{entity.name}}</option>
+              </select>
+            </div>
           </div>
 
-          <div class="pure-u-1 pure-u-md-1-3">
-            <label for="trigger-operator">Operator</label>
-            <select id="trigger-operator" name="trigger-operator" class="pure-u-1">
-              <option>= (Equals)</option>
-              <option>&lt; (Less Than)</option>
-              <option>&le; (Less Than or Equal To)</option>
-              <option>&gt; (Greather Than)</option>
-              <option>&ge; (Greather Than or Equal To)</option>
-            </select>
+          <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="selectedEntity">
+            <div class="pure-u-23-24">
+              <label for="trigger-entity-property">Entity Attribute</label>
+              <!-- <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map"> -->
+              <select id="trigger-entity-property" name="trigger-entity-property" [(ngModel)]="trigger.attribute" class="pure-u-1">
+                <option *ngFor="let attribute of selectedEntity.attributes" [ngValue]="attribute">{{attribute.name}}</option>
+              </select>
+            </div>
           </div>
 
-          <div class="pure-u-1 pure-u-md-1-3">
-            <label for="trigger-value">Value</label>
-            <input [(ngModel)]="tValue" id="trigger-value" name="trigger-value" class="pure-u-1" type="number">
+          <div class="pure-u-1 pure-u-md-1-3 auto">
+            <div class="pure-u-23-24">
+              <label for="trigger-operator">Operator</label>
+              <select id="trigger-operator" name="trigger-operator" class="pure-u-1">
+                <option>= (Equals)</option>
+                <option>&lt; (Less Than)</option>
+                <option>&le; (Less Than or Equal To)</option>
+                <option>&gt; (Greather Than)</option>
+                <option>&ge; (Greather Than or Equal To)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pure-u-1 pure-u-md-1-3 auto">
+            <div class="pure-u-23-24">
+              <label for="trigger-value">Value {{trigger && trigger.attribute.unit ? "(" + trigger.attribute.unit + ")" : ""}}</label>
+              <input [(ngModel)]="tValue" id="trigger-value" name="trigger-value" class="pure-u-1" type="number">
+            </div>
           </div>
         </div>
       </fieldset>
 
       <fieldset>
-            <legend>Action</legend>
-    
-            <div class="pure-g">
-              <div class="pure-u-1 pure-u-md-1-3">
-                <label for="action-entity">Entity</label>
-                <input [(ngModel)]="aEntity" id="action-entity" name="action-entity" class="pure-u-1" type="text" placeholder="map">
-              </div>
-    
-              <div class="pure-u-1 pure-u-md-1-3">
-                <label for="action-attribute">Attribute</label>
-                <input [(ngModel)]="aAttribute" id="action-attribute" name="action-attribute" class="pure-u-1" type="text" placeholder="zoom">
-              </div>
-    
-              <div class="pure-u-1 pure-u-md-1-3">
-                <label for="action-value">Value</label>
-                <input [(ngModel)]="aValue" id="action-value" name="action-value" class="pure-u-1" type="number">
-              </div>
-            </div>
-    
-          </fieldset>
-          <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [ngClass]="{'pure-button-disabled': !tEntity || !aEntity || !aAttribute}"><i class="far fa-check-circle"></i> Submit</button>
+        <legend>Action</legend>
+
+        <div class="pure-g">
+          <div class="pure-u-1 pure-u-md-1-3 auto">
+            <label for="action-entity">Entity</label>
+            <input [(ngModel)]="aEntity" id="action-entity" name="action-entity" class="pure-u-1" type="text" placeholder="map">
+          </div>
+
+          <div class="pure-u-1 pure-u-md-1-3 auto">
+            <label for="action-attribute">Attribute</label>
+            <input [(ngModel)]="aAttribute" id="action-attribute" name="action-attribute" class="pure-u-1" type="text" placeholder="zoom">
+          </div>
+
+          <div class="pure-u-1 pure-u-md-1-3 auto">
+            <label for="action-value">Value</label>
+            <input [(ngModel)]="aValue" id="action-value" name="action-value" class="pure-u-1" type="number">
+          </div>
+        </div>
+
+      </fieldset>
+      <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [ngClass]="{'pure-button-disabled': !tEntity || !aEntity || !aAttribute}">
+        <i class="far fa-check-circle"></i> Submit</button>
     </form>
   </div>
 </div>
 
-    <!-- {
+<!-- {
         "rules": [
             {
                 "condition": {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Rule } from '../rule/rule';
 import { RuleService } from '../rule/rule-service.service';
+import { EntityService } from '../rule/entities/entity-service.service';
 
 @Component({
   selector: 'app-rule-list',
@@ -12,7 +13,7 @@ export class RuleListComponent implements OnInit {
   rules: Rule[];
   selectedRule: Rule;
 
-  constructor(private ruleService: RuleService) { }
+  constructor(private ruleService: RuleService, private entityService: EntityService) { }
 
   ngOnInit() {
     this.ruleService.getRules().subscribe(resp => this.rules = resp);
