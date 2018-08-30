@@ -5,6 +5,7 @@ import { ConfiguratorComponent } from './configurator/configurator.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RuleListComponent } from './rule-list/rule-list.component';
+import { OnlyActions } from './rule/entities/only-actions.pipe';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { RuleListComponent } from './rule-list/rule-list.component';
   declarations: [
     MenuComponent,
     ConfiguratorComponent,
-    RuleListComponent
+    RuleListComponent,
+    OnlyActions
   ]
 })
 export class MenuModule { }

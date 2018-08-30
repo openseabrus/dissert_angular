@@ -4,6 +4,7 @@ export class Entity {
     attributes: [{
         name: string,
         type: string,
-        unit: string
+        unit: string,
+        asAction?: boolean
     }];
 }
