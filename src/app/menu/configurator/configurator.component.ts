@@ -15,6 +15,10 @@ import { Entity } from '../rule/entities/entity';
 })
 export class ConfiguratorComponent implements OnInit {
 
+  private TRIGGER = 0;
+  private ACTION = 1;
+  private TRIGGER_AND_ACTION = 2;
+
   private tEntity: string;
   private tValue: number;
 
@@ -22,7 +26,8 @@ export class ConfiguratorComponent implements OnInit {
   private aAttribute: string;
   private aValue: number;
   private entities: Entity[];
-  private selectedEntity: Entity;
+  private triggerEntity: Entity;
+  private actionEntity: Entity;
   private trigger: Trigger;
   private action: Action;
 
@@ -32,13 +37,14 @@ export class ConfiguratorComponent implements OnInit {
     this.entityService.getEntities().subscribe(res => {
       this.entities = res;
       if (this.entities.length > 0) {
-        this.selectedEntity = this.entities[0];
+        this.triggerEntity = this.entities[0];
+        this.actionEntity = this.entities[0];
         this.trigger = new Trigger();
         this.action = new Action();
-        this.changeEntity();
+        this.changeEntity(this.TRIGGER_AND_ACTION);
       }
     });
-    this.selectedEntity = null;
+    this.triggerEntity = null;
     this.tEntity = '';
     this.tValue = 0;
 
@@ -51,12 +57,27 @@ export class ConfiguratorComponent implements OnInit {
     this.menuCloserService.contentClick();
   }
 
-  public changeEntity(e?: Event) {
-    console.log(this.trigger);
-    console.log('^ trigger || selectedEntity v');
-    console.log(this.selectedEntity);
-    this.trigger.entity = this.selectedEntity.name;
-    this.trigger.attribute = this.selectedEntity.attributes[0];
+  public changeEntity(action: number, e?: Event) {
+    switch (action) {
+      case this.TRIGGER: {
+        console.log('triggered');
+        this.trigger.entity = this.triggerEntity.name;
+        this.trigger.attribute = this.triggerEntity.attributes[0];
+        break;
+      }
+      case this.ACTION: {
+        console.log('actioned');
+        this.action.entity = this.actionEntity.name;
+        this.action.attribute = this.actionEntity.attributes[0];
+        break;
+      }
+      default: {
+        this.trigger.entity = this.triggerEntity.name;
+        this.trigger.attribute = this.triggerEntity.attributes[0];
+        this.action.entity = this.actionEntity.name;
+        this.action.attribute = this.actionEntity.attributes[0];
+      }
+    }
   }
 
   public submitRule() {
@@ -69,7 +90,7 @@ export class ConfiguratorComponent implements OnInit {
     t.value = this.tValue;
 
     a.entity = this.aEntity;
-    a.attribute = this.aAttribute;
+    // a.attribute = this.aAttribute;
     a.value = this.aValue;
 
     r.trigger = t;

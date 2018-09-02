@@ -16,18 +16,18 @@
             <div class="pure-u-23-24">
               <label for="trigger-entity">Entity</label>
               <!-- <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map"> -->
-              <select id="trigger-entity" name="trigger-entity" [(ngModel)]="selectedEntity" (ngModelChange)="changeEntity($event)" class="pure-u-1">
+              <select id="trigger-entity" name="trigger-entity" [(ngModel)]="triggerEntity" (ngModelChange)="changeEntity(0, $event)" class="pure-u-1">
                 <option *ngFor="let entity of entities" [ngValue]="entity">{{entity.name}}</option>
               </select>
             </div>
           </div>
 
-          <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="selectedEntity">
+          <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="triggerEntity">
             <div class="pure-u-23-24">
               <label for="trigger-entity-property">Entity Attribute</label>
               <!-- <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map"> -->
               <select id="trigger-entity-property" name="trigger-entity-property" [(ngModel)]="trigger.attribute" class="pure-u-1">
-                <option *ngFor="let attribute of selectedEntity.attributes" [ngValue]="attribute">{{attribute.name}}</option>
+                <option *ngFor="let attribute of triggerEntity.attributes" [ngValue]="attribute">{{attribute.name}}</option>
               </select>
             </div>
           </div>
@@ -62,15 +62,19 @@
             <div class="pure-u-23-24">
               <label for="action-entity">Entity</label>
               <!-- <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map"> -->
-              <select id="action-entity" name="action-entity" class="pure-u-1">
+              <select  id="action-entity" [(ngModel)]="actionEntity" (ngModelChange)="changeEntity(1, $event)" name="action-entity" class="pure-u-1">
                 <option *ngFor="let entity of entities | onlyActions" [ngValue]="entity">{{entity.name}}</option>
               </select>
             </div>
           </div>
 
-          <div class="pure-u-1 pure-u-md-1-3 auto">
-            <label for="action-attribute">Attribute</label>
-            <input [(ngModel)]="aAttribute" id="action-attribute" name="action-attribute" class="pure-u-1" type="text" placeholder="zoom">
+          <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="actionEntity">
+            <div class="pure-u-23-24">
+              <label for="action-entity-property">Entity Attribute</label>
+              <select id="action-entity-property" name="action-entity-property" [(ngModel)]="action.attribute" class="pure-u-1">
+                <option *ngFor="let attribute of actionEntity.attributes | onlyActionAttributes" [ngValue]="attribute">{{attribute.name}}</option>
+              </select>
+            </div>
           </div>
 
           <div class="pure-u-1 pure-u-md-1-3 auto">

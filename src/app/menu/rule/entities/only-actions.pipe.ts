@@ -20,3 +20,14 @@ export class OnlyActions implements PipeTransform {
         });
     }
 }
+
+@Pipe({name: 'onlyActionAttributes'})
+export class OnlyActionAttributes implements PipeTransform {
+    transform(attributes: any[]): any[] {
+        if (!attributes) {
+            return null;
+        }
+
+        return attributes.filter(attribute => attribute.asAction);
+    }
+}
