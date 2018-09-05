@@ -32,7 +32,7 @@
             </div>
           </div>
 
-          <div class="pure-u-1 pure-u-md-1-3 auto">
+          <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="trigger.attribute.type === 'number'">
             <div class="pure-u-23-24">
               <label for="trigger-operator">Operator</label>
               <select id="trigger-operator" name="trigger-operator" class="pure-u-1">
@@ -48,7 +48,7 @@
           <div class="pure-u-1 pure-u-md-1-3 auto">
             <div class="pure-u-23-24">
               <label for="trigger-value">Value {{trigger && trigger.attribute.unit ? "(" + trigger.attribute.unit + ")" : ""}}</label>
-              <input [(ngModel)]="tValue" id="trigger-value" name="trigger-value" class="pure-u-1" type="{{trigger && trigger.attribute.type ? trigger.attribute.type : 'text'}}">
+              <input [(ngModel)]="trigger.value" id="trigger-value" name="trigger-value" class="pure-u-1" placeholder="0" type="{{trigger && trigger.attribute.type ? trigger.attribute.type : 'text'}}">
             </div>
           </div>
         </div>
@@ -79,12 +79,12 @@
 
           <div class="pure-u-1 pure-u-md-1-3 auto">
             <label for="action-value">Value</label>
-            <input [(ngModel)]="aValue" id="action-value" name="action-value" class="pure-u-1" type="number">
+            <input [(ngModel)]="action.value" id="action-value" name="action-value" class="pure-u-1" type="number" placeholder="0">
           </div>
         </div>
 
       </fieldset>
-      <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [ngClass]="{'pure-button-disabled': !tEntity || !aEntity || !aAttribute}">
+      <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [ngClass]="{'pure-button-disabled': !isFormValid()}">
         <i class="far fa-check-circle"></i> Submit</button>
     </form>
   </div>

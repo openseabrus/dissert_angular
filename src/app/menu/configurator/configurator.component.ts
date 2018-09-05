@@ -19,12 +19,6 @@ export class ConfiguratorComponent implements OnInit {
   private ACTION = 1;
   private TRIGGER_AND_ACTION = 2;
 
-  private tEntity: string;
-  private tValue: number;
-
-  private aEntity: string;
-  private aAttribute: string;
-  private aValue: number;
   private entities: Entity[];
   private triggerEntity: Entity;
   private actionEntity: Entity;
@@ -39,18 +33,11 @@ export class ConfiguratorComponent implements OnInit {
       if (this.entities.length > 0) {
         this.triggerEntity = this.entities[0];
         this.actionEntity = this.entities[0];
-        this.trigger = new Trigger();
-        this.action = new Action();
         this.changeEntity(this.TRIGGER_AND_ACTION);
       }
     });
-    this.triggerEntity = null;
-    this.tEntity = '';
-    this.tValue = 0;
-
-    this.aEntity = '';
-    this.aAttribute = '';
-    this.aValue = 0;
+    this.trigger = new Trigger();
+    this.action = new Action();
   }
 
   public setMenu() {
@@ -81,24 +68,19 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   public submitRule() {
-    const r = new Rule();
-    const t = new Trigger();
-    const a = new Action();
 
-    t.entity = this.tEntity;
-    t.operator = 'eq';
-    t.value = this.tValue;
+    if (this.trigger.attribute.type !== 'number') {
+      delete this.trigger.operator;
+    }
 
-    a.entity = this.aEntity;
-    // a.attribute = this.aAttribute;
-    a.value = this.aValue;
-
-    r.trigger = t;
-    r.action = a;
-
-    console.log(r);
     // this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
-    this.config.createRule(r).subscribe((res) => console.log(res));
+    this.config.createRule(new Rule(this.trigger, this.action)).subscribe((res) => console.log(res));
+  }
+
+  private isFormValid() {
+    return this.action.attribute && this.action.entity && this.action.value &&
+    this.trigger.attribute && this.trigger.entity && this.trigger.value &&
+    (this.trigger.attribute.type === 'number' ? this.trigger.operator : true);
   }
 
 }
