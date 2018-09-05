@@ -13,7 +13,15 @@ export class Trigger {
 
     constructor(entity?: string, attribute?: any, operator?: string, value?: number) {
         this.entity = entity;
-        this.attribute = attribute;
+        if (attribute) {
+            this.attribute = attribute;
+        } else {
+            this.attribute = {
+                name: null,
+                type: null,
+                unit: null
+            };
+        }
         this.operator = operator;
         this.value = value;
     }
