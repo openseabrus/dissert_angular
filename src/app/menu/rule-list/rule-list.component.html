@@ -13,8 +13,7 @@
 
           <h4>Action</h4>
           <p>Entity: {{rule.action.entity}}</p>
-          <p>Attribute: {{rule.action.attribute}}</p>
-          <p>Value: {{rule.action.value}}</p>
+          <p>Set: {{rule.action.attribute.name}} to {{rule.action.value}} {{rule.action.attribute.unit ? rule.action.attribute.unit : ""}}</p>
           <p>Created: {{rule.createDate | date: 'd MMM yyyy, HH:mm'}}</p>
 
           <button (click)="deleteRule(i)" class="pure-button pure-button-primary button-error center"><i class="fas fa-trash-alt"></i></button>
