@@ -5,6 +5,7 @@ export class Action {
         name: string;
         type: string;
         unit: string;
+        asAction?: boolean;
     };
     value: number;
 

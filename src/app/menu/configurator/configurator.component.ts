@@ -68,10 +68,16 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   public submitRule() {
+    if (!this.isFormValid()) {
+      return;
+    }
 
     if (this.trigger.attribute.type !== 'number') {
       delete this.trigger.operator;
     }
+
+    delete this.trigger.attribute.asAction;
+    delete this.action.attribute.asAction;
 
     // this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
     this.config.createRule(new Rule(this.trigger, this.action)).subscribe((res) => console.log(res));

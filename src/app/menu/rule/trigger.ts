@@ -7,11 +7,12 @@ export class Trigger {
         name: string;
         type: string;
         unit: string;
+        asAction?: boolean;
     };
     operator: string;
     value: number;
 
-    constructor(entity?: string, attribute?: any, operator?: string, value?: number) {
+    constructor(entity?: string, attribute?: any, value?: number, operator?: string) {
         this.entity = entity;
         if (attribute) {
             this.attribute = attribute;
