@@ -84,6 +84,7 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   private isFormValid() {
+    console.log(this.trigger.operator);
     return this.action.attribute && this.action.entity && this.action.value &&
     this.trigger.attribute && this.trigger.entity && this.trigger.value &&
     (this.trigger.attribute.type === 'number' ? this.trigger.operator : true);
