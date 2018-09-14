@@ -23,7 +23,7 @@ export class Trigger {
                 unit: null
             };
         }
-        this.operator = operator;
+        this.operator = operator || 'eq';
         this.value = value;
     }
 }

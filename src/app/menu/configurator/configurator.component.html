@@ -35,12 +35,12 @@
           <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="trigger.attribute.type === 'number'">
             <div class="pure-u-23-24">
               <label for="trigger-operator">Operator</label>
-              <select id="trigger-operator" name="trigger-operator" class="pure-u-1">
-                <option>= (Equals)</option>
-                <option>&lt; (Less Than)</option>
-                <option>&le; (Less Than or Equal To)</option>
-                <option>&gt; (Greather Than)</option>
-                <option>&ge; (Greather Than or Equal To)</option>
+              <select id="trigger-operator" name="trigger-operator" class="pure-u-1" [(ngModel)]="trigger.operator">
+                <option value="eq">= (Equals)</option>
+                <option value="lt">&lt; (Less Than)</option>
+                <option value="lte">&le; (Less Than or Equal To)</option>
+                <option value="gt">&gt; (Greather Than)</option>
+                <option value="ge">&ge; (Greather Than or Equal To)</option>
               </select>
             </div>
           </div>
