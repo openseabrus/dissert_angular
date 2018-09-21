@@ -1,14 +1,9 @@
-import { Entity } from './entities/entity';
+import { Attribute } from './attribute/attribute';
 
 export class Trigger {
     _id?: string;
     entity: string;
-    attribute: {
-        name: string;
-        type: string;
-        unit: string;
-        asAction?: boolean;
-    };
+    attribute: Attribute;
     operator: string;
     value: number;
 
@@ -17,11 +12,7 @@ export class Trigger {
         if (attribute) {
             this.attribute = attribute;
         } else {
-            this.attribute = {
-                name: null,
-                type: null,
-                unit: null
-            };
+            this.attribute = new Attribute;
         }
         this.operator = operator || 'eq';
         this.value = value;
