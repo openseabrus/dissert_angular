@@ -78,6 +78,8 @@ export class ConfiguratorComponent implements OnInit {
 
     delete this.trigger.attribute.asAction;
     delete this.action.attribute.asAction;
+    delete this.trigger.attribute.fields;
+    delete this.action.attribute.fields;
 
     // this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
     this.config.createRule(new Rule(this.trigger, this.action)).subscribe((res) => console.log(res));
