@@ -23,14 +23,7 @@ export class RuleService {
       })
     };
     return this.http.get<Array<any>>(this.rulesURL).pipe(
-      map(obj => obj.map( o => {
-        const t = o['trigger'];
-        const trigger = new Trigger(t['entity'], t['operator'], t['value']);
-
-        const a = o['action'];
-        const action = new Action(a['entity'], a['attribute'], a['value']);
-        return new Rule(trigger, action, o['createDate'], o['_id']);
-      }))
+      map(obj => obj.map( o => new Rule(o)))
     );
   }
 
