@@ -5,14 +5,20 @@ export class Rule {
     _id?: string;
     trigger: Trigger;
     action: Action;
-    createDate: string;
+    createDate?: string;
 
-    constructor(t?: Trigger, a?: Action, c?: string, _id?: string) {
-        this.trigger = t;
-        this.action = a;
-        this.createDate = c;
-        if (_id) {
-            this._id = _id;
-        }
+    constructor(rule: any) {
+        this._id = rule._id;
+        this.trigger = rule.trigger;
+        this.action = rule.action;
+        this.createDate = rule.createDate;
+    }
+
+    public static buildFromElems(trigger: Trigger, action: Action): Rule {
+        const obj = {};
+        obj['trigger'] = trigger;
+        obj['action'] = action;
+
+        return new Rule(obj);
     }
 }

@@ -16,7 +16,10 @@ export class RuleListComponent implements OnInit {
   constructor(private ruleService: RuleService, private entityService: EntityService) { }
 
   ngOnInit() {
-    this.ruleService.getRules().subscribe(resp => this.rules = resp);
+    this.ruleService.getRules().subscribe(resp => {
+      console.log(resp);
+      this.rules = resp;
+    });
     if (this.rules) {
       this.selectedRule = this.rules[0];
     }

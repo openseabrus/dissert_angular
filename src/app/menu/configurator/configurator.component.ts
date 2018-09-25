@@ -82,7 +82,7 @@ export class ConfiguratorComponent implements OnInit {
     delete this.action.attribute.fields;
 
     // this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
-    this.config.createRule(new Rule(this.trigger, this.action)).subscribe((res) => console.log(res));
+    this.config.createRule(Rule.buildFromElems(this.trigger, this.action)).subscribe((res) => console.log(res));
   }
 
   private isFormValid() {
