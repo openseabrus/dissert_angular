@@ -64,9 +64,21 @@ app.post("/api/rules", function(req, res) {
     timeZone: 'Europe/Lisbon'
   });
 
+  // delete this.trigger['attribute']['asAction'];
+  // delete this.action['attribute']['asAction'];
+  // delete this.trigger['attribute']['fields'];
+  // delete this.action['attribute']['fields'];
+  // delete this.trigger.operator;
+
   if (!req.body.trigger || !req.body.action) {
     handleError(res, "Invalid user input", "Must provide a trigger and action.", 400);
   } else {
+    delete newRule.trigger['attribute']['asAction'];
+    delete newRule.trigger['attribute']['asAction'];
+    delete newRule.action['attribute']['asAction'];
+    delete newRule.trigger['attribute']['fields'];
+    delete newRule.action['attribute']['fields'];
+    delete newRule.trigger.operator;
     db.collection(RULES_COLLECTION).insertOne(newRule, function(err, doc) {
       if (err) {
         handleError(res, err.message, "Failed to create new rule.");

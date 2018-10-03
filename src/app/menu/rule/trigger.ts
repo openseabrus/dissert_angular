@@ -4,7 +4,7 @@ export class Trigger {
     _id?: string;
     entity: string;
     attribute: Attribute;
-    operator: string;
+    operator?: string;
     value: number;
 
     constructor(entity?: string, attribute?: any, value?: number, operator?: string) {

@@ -73,20 +73,24 @@ export class ConfiguratorComponent implements OnInit {
     }
 
     if (this.trigger.attribute.type !== 'number') {
-      delete this.trigger.operator;
+      console.log(this.trigger);
+      if (this.trigger.operator) {
+        // delete this.trigger.operator;
+      }
     }
 
-    delete this.trigger.attribute.asAction;
-    delete this.action.attribute.asAction;
-    delete this.trigger.attribute.fields;
-    delete this.action.attribute.fields;
+    console.log(this.trigger);
+    // delete this.trigger['attribute']['asAction'];
+    // delete this.action['attribute']['asAction'];
+    // delete this.trigger['attribute']['fields'];
+    // delete this.action['attribute']['fields'];
+    console.log(this.trigger);
 
-    // this.config.createRule(r).then((res) => { console.log(res); }).catch((err) => { console.log(err); });
-    this.config.createRule(Rule.buildFromElems(this.trigger, this.action)).subscribe((res) => console.log(res));
+
+    this.config.createRule(Rule.buildFromElems(this.trigger, this.action)).subscribe();
   }
 
   private isFormValid() {
-    console.log(this.trigger.operator);
     return this.action.attribute && this.action.entity && this.action.value &&
     this.trigger.attribute && this.trigger.entity && this.trigger.value &&
     (this.trigger.attribute.type === 'number' ? this.trigger.operator : true);
