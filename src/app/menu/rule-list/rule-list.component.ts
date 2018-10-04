@@ -11,7 +11,6 @@ import { EntityService } from '../rule/entities/entity-service.service';
 export class RuleListComponent implements OnInit {
 
   rules: Rule[];
-  selectedRule: Rule;
 
   constructor(private ruleService: RuleService, private entityService: EntityService) { }
 
@@ -20,9 +19,6 @@ export class RuleListComponent implements OnInit {
       console.log(resp);
       this.rules = resp;
     });
-    if (this.rules) {
-      this.selectedRule = this.rules[0];
-    }
   }
 
   deleteRule(index: number) {

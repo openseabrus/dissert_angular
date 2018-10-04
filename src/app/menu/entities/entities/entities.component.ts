@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Entity } from '../../rule/entities/entity';
+import { EntityService } from '../../rule/entities/entity-service.service';
 
 @Component({
   selector: 'app-entities',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntitiesComponent implements OnInit {
 
-  constructor() { }
+  entities: Entity[];
+
+  constructor(private entityService: EntityService) { }
 
   ngOnInit() {
+    this.entityService.getEntities().subscribe(resp => {
+      console.log(resp);
+      this.entities = resp;
+    });
+  }
+
+  deleteEntity(index: number) {
+    if (index >= 0 && index < this.entities.length) {
+      this.entities.splice(index, 1);
+    }
   }
 
 }
