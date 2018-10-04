@@ -1,3 +1,26 @@
-<p>
-  entities works!
-</p>
+<div id="main">
+  <div class="header">
+    <h1>Entities</h1>
+  </div>
+
+  <div *ngIf="entities" class="content">
+    <div class="pure-g">
+      <div class="pure-u-sm-23-24 pure-u-xl-7-24 pure-u-23-24 entity" *ngFor="let entity of entities; let i = index">
+          <h3 class="entity-tile">{{entity.name}}</h3>
+          <div class="entity-content">
+            <p><span class="property">Attributes:</span></p>
+
+            <div class="one-level-property" *ngFor="let attribute of entity.attributes">
+              <h4 class="entity-tile">{{attribute.name}} {{ attribute.fields[0].unit ? "(" + attribute.fields[0].unit + ")" : "" }}</h4>
+              <p><span class="property">Actionable:</span> {{attribute.asAction}}</p>
+
+            </div>
+          </div>
+
+          <button (click)="deleteRule(i)" class="pure-button pure-button-primary button-error center"><i class="fas fa-trash-alt" style="padding-right: 10px;"></i> Delete Entity</button>
+          <!-- <app-card
+          [rule]="rule"></app-card> -->
+      </div>
+    </div>
+  </div>
+</div>

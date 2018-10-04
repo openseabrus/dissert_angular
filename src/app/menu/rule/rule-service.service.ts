@@ -22,7 +22,7 @@ export class RuleService {
         'Accept':  'application/json'
       })
     };
-    return this.http.get<Array<any>>(this.rulesURL).pipe(
+    return this.http.get<Array<Rule>>(this.rulesURL).pipe(
       map(obj => obj.map( o => new Rule(o)))
     );
   }
