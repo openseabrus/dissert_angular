@@ -14,7 +14,7 @@
       <ul class="pure-menu-list">
         <li *ngFor="let item of menuItems; let i = index" (click)="selectMenu(i)" class="pure-menu-item" routerLinkActive="pure-menu-selected" [routerLinkActiveOptions]="{exact:
           true}">
-          <a routerLink="/{{item.route}}" class="pure-menu-link">{{item.name}}</a>
+          <a routerLink="/{{item.route}}" class="pure-menu-link"><i class="{{item.icon}}"></i> {{item.name}}</a>
         </li>
       </ul>
     </div>

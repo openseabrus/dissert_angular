@@ -1,0 +1,15 @@
+.card {
+    border: 1px solid #FF4136;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: rgb(255, 148, 143);
+    color: #191919;
+}
+
+.center {
+    margin: auto;
+    margin-top: 5px;
+    display: flex;
+}

@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ConfiguratorComponent } from './configurator/configurator.component';
 import { MenuComponent } from './menu.component';
 import { RuleListComponent } from './rule-list/rule-list.component';
+import { EntitiesComponent } from './entities/entities/entities.component';
+import { NewEntityComponent } from './entities/new-entity/new-entity.component';
 
 const menuRoutes: Routes = [
   { path: '', redirectTo: '/rules', pathMatch: 'full' },
@@ -17,6 +19,14 @@ const menuRoutes: Routes = [
       {
         path: 'rules/new',
         component: ConfiguratorComponent
+      },
+      {
+        path: 'entities',
+        component: EntitiesComponent
+      },
+      {
+        path: 'entities/new',
+        component: NewEntityComponent
       }
     ]
   }

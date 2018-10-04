@@ -6,6 +6,9 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RuleListComponent } from './rule-list/rule-list.component';
 import { OnlyActions, OnlyActionAttributes } from './rule/entities/only-actions.pipe';
+import { CardComponent } from './rule-list/card/card.component';
+import { EntitiesComponent } from './entities/entities/entities.component';
+import { NewEntityComponent } from './entities/new-entity/new-entity.component';
 
 @NgModule({
   imports: [
@@ -18,7 +21,10 @@ import { OnlyActions, OnlyActionAttributes } from './rule/entities/only-actions.
     ConfiguratorComponent,
     RuleListComponent,
     OnlyActions,
-    OnlyActionAttributes
+    OnlyActionAttributes,
+    CardComponent,
+    EntitiesComponent,
+    NewEntityComponent
   ]
 })
 export class MenuModule { }

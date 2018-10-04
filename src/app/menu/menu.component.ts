@@ -27,19 +27,23 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.menuItems = [
       {
         name: 'New Rule',
+        icon: 'fas fa-plus',
         route: 'rules/new'
       },
       {
         name: 'Adaptation Rules',
+        icon: 'fas fa-check',
         route: 'rules'
       },
       {
-        name: 'Triggers',
-        route: 'triggers'
+        name: 'New Entity',
+        icon: 'far fa-plus-square',
+        route: 'entities/new'
       },
       {
-        name: 'Actions',
-        route: 'actions'
+        name: 'Entities',
+        icon: 'far fa-check-square',
+        route: 'entities'
       }
     ];
     this.menuOpened = false;
