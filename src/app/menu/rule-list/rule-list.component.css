@@ -1,8 +1,10 @@
 .rule {
-    margin: auto;
     margin-top: 15px;
     padding: 10px;
     border: 1px solid #e4e4e4;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .rule-content {
@@ -15,11 +17,16 @@
 }
 
 .center {
-    margin: 50px auto 25px auto;
     display: flex;
+    justify-content: space-between;
+    margin: 20px auto 0px auto;
 }
 
 .property {
     font-weight: 600;
     margin-left: 15px;
+}
+
+.pure-g {
+    justify-content: space-between;
 }
