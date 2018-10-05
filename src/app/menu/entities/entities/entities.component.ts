@@ -15,7 +15,6 @@ export class EntitiesComponent implements OnInit {
 
   ngOnInit() {
     this.entityService.getEntities().subscribe(resp => {
-      console.log(resp);
       this.entities = resp;
     });
   }
