@@ -12,4 +12,14 @@ export class Entity {
         this.name = e.name;
         this.attributes = e.attributes;
     }
+
+    public static emptyEntity(): Entity {
+        const attr: Attribute = new Attribute();
+        const ent = {
+            name: null,
+            attributes: [attr]
+        };
+
+        return new Entity(ent);
+    }
 }

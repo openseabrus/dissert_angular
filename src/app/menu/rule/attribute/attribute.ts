@@ -5,4 +5,11 @@ export class Attribute {
     asAction: boolean;
     fields?: Field[];
     type?: string;
+
+    constructor(name?: string, asAction?: boolean) {
+        if (arguments.length > 0) {
+            this.name = name;
+            this.asAction = asAction;
+        }
+    }
 }
