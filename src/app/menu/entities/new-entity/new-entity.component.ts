@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Entity } from '../../rule/entities/entity';
 
 @Component({
   selector: 'app-new-entity',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewEntityComponent implements OnInit {
 
+  private entity: Entity;
+
   constructor() { }
 
   ngOnInit() {
+    this.entity = Entity.emptyEntity();
   }
 
 }
