@@ -7,6 +7,7 @@ export class Attribute {
     type?: string;
 
     constructor(name?: string, asAction?: boolean) {
+        this.asAction = false;
         if (arguments.length > 0) {
             this.name = name;
             this.asAction = asAction;

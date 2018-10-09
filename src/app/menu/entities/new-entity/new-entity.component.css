@@ -1,0 +1,9 @@
+.right {
+    float: right;
+}
+
+.buttons {
+    display: flex;
+    flex: 0 1 auto;
+    justify-content: space-evenly;
+}
