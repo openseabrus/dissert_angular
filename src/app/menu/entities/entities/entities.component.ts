@@ -21,7 +21,10 @@ export class EntitiesComponent implements OnInit {
 
   deleteEntity(index: number) {
     if (index >= 0 && index < this.entities.length) {
-      this.entities.splice(index, 1);
+      this.entityService.deleteEntity(this.entities[index]._id).subscribe(
+        success => { this.entities.splice(index, 1); console.log('Sucess'); },
+        error => console.log('Error deleting entity.')
+      );
     }
   }
 

@@ -20,7 +20,7 @@
 
       <div *ngFor="let attribute of entity.attributes; let i = index">
         <fieldset>
-          <legend>Attribute #{{i + 1}}</legend>
+          <legend>Attribute #{{i + 1}} ({{attribute._id}})</legend>
           <div class="pure-g">
             <div class="pure-u-4-5">
               <div class="pure-u-23-24">
@@ -44,10 +44,10 @@
             </div>
 
             <fieldset class="pure-u-4-5">
-              <legend>Field</legend>
+              <legend>Values</legend>
               <div *ngFor="let field of attribute.fields" class="pure-u-23-24">
 
-                <label for="field-type">Field Type</label>
+                <label for="field-type">Value Type</label>
                 <select id="field-type" name="field-type" class="pure-u-1" [(ngModel)]="field.type">
                   <option value="string">String</option>
                   <option value="number">Integer</option>
@@ -55,7 +55,7 @@
                   <option value="boolean">Boolean</option>
                 </select>
 
-                <label for="field-unit">Field Unit (May be left empty)</label>
+                <label for="field-unit">Value Unit (May be left empty)</label>
                 <input class="pure-u-1" id="field-unit" name="field-unit" [(ngModel)]="field.unit" placeholder="km/h"/>
               </div>
             </fieldset>

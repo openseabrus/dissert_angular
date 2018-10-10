@@ -1,6 +1,8 @@
 import { Field } from './field';
+import { UUID } from 'angular2-uuid';
 
 export class Attribute {
+    _id?: string;
     name: string;
     asAction: boolean;
     fields?: Field[];
@@ -12,5 +14,6 @@ export class Attribute {
             this.asAction = asAction;
         }
         this.fields = [new Field()];
+        this._id = UUID.UUID();
     }
 }
