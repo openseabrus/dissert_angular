@@ -12,7 +12,7 @@
           <div class="pure-u-4-5">
             <div class="pure-u-23-24">
               <label for="entity-name">Entity Name (e.g. Device, User, Weather, etc)</label>
-              <input class="pure-u-1" id="entity-name" name="entity-name" [(ngModel)]="entity.name" />
+              <input class="pure-u-1" id="entity-name" name="entity-name" [(ngModel)]="entity.name" [ngClass]="{'incomplete': !entity.name}" />
             </div>
           </div>
         </div>
@@ -25,12 +25,13 @@
             <div class="pure-u-4-5">
               <div class="pure-u-23-24">
                 <label for="attribute-name">Attribute Name (e.g. Battery, Speed, Temperature, etc)</label>
-                <input class="pure-u-1" id="attribute-name" name="attribute-name" [(ngModel)]="attribute.name" />
+                <input class="pure-u-1" id="attribute-name" name="attribute-name" [(ngModel)]="attribute.name"
+                  [ngClass]="{'incomplete': !attribute.name}" />
               </div>
             </div>
             <div class="pure-u-1-5">
-              <button (click)="removeAttribute(i)" *ngIf="entity.attributes.length > 1" class="pure-button button-warning right"><i
-                  class="fas fa-times"></i></button>
+              <button (click)="removeAttribute(i)" *ngIf="entity.attributes.length > 1" class="pure-button button-error right"><i
+                  class="fas fa-trash-alt"></i></button>
             </div>
             <div class="pure-u-4-5">
               <div class="pure-u-23-24">
@@ -41,12 +42,34 @@
                 </select>
               </div>
             </div>
+
+            <fieldset class="pure-u-4-5">
+              <legend>Field</legend>
+              <div *ngFor="let field of attribute.fields" class="pure-u-23-24">
+
+                <label for="field-type">Field Type</label>
+                <select id="field-type" name="field-type" class="pure-u-1" [(ngModel)]="field.type">
+                  <option value="string">String</option>
+                  <option value="number">Integer</option>
+                  <option value="double">Double</option>
+                  <option value="boolean">Boolean</option>
+                </select>
+
+                <label for="field-unit">Field Unit (May be left empty)</label>
+                <input class="pure-u-1" id="field-unit" name="field-unit" [(ngModel)]="field.unit" placeholder="km/h"/>
+              </div>
+            </fieldset>
           </div>
         </fieldset>
       </div>
-      <div class="buttons">
-        <button (click)="addAttribute()" class="pure-button button-secondary"><i class="fas fa-plus-circle"></i> Add Attribute</button>
-        <button (click)="submitEntity()" class="pure-button pure-button-primary button-success"><i class="far fa-check-circle"></i> Submit Entity</button>
+      <div class="pure-g">
+        <div class="buttons pure-u-1 pure-u-lg-1-2">
+          <button (click)="addAttribute()" class="pure-button button-secondary"><i class="fas fa-plus-circle"></i> Add
+            Attribute</button>
+          <button (click)="submitEntity()" class="pure-button pure-button-primary button-success" [ngClass]="{'pure-button-disabled': !checkIsFormValid()}"><i
+              class="far fa-check-circle"></i>
+            Submit Entity</button>
+        </div>
       </div>
     </form>
   </div>

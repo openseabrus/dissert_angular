@@ -23,7 +23,22 @@ export class EntityService {
     );
   }
 
+  // post("/api/rules")
+  createEntity(newEntity: Entity): Observable<void | any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    console.log(newEntity);
+    return this.http.post(this.entitiesURL, newEntity, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
+    console.log("ERROR");
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);

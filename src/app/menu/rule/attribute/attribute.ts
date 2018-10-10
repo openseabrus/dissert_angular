@@ -4,7 +4,6 @@ export class Attribute {
     name: string;
     asAction: boolean;
     fields?: Field[];
-    type?: string;
 
     constructor(name?: string, asAction?: boolean) {
         this.asAction = false;
@@ -12,5 +11,6 @@ export class Attribute {
             this.name = name;
             this.asAction = asAction;
         }
+        this.fields = [new Field()];
     }
 }
