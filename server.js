@@ -35,7 +35,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
   });
 });
 
-// CONTACTS API ROUTES BELOW
+// RULES API ROUTES BELOW
 
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
@@ -63,12 +63,6 @@ app.post("/api/rules", function(req, res) {
   newRule.createDate = new Date().toLocaleString('en-US', {
     timeZone: 'Europe/Lisbon'
   });
-
-  // delete this.trigger['attribute']['asAction'];
-  // delete this.action['attribute']['asAction'];
-  // delete this.trigger['attribute']['fields'];
-  // delete this.action['attribute']['fields'];
-  // delete this.trigger.operator;
 
   if (!req.body.trigger || !req.body.action) {
     handleError(res, "Invalid user input", "Must provide a trigger and action.", 400);
@@ -109,6 +103,7 @@ app.delete("/api/rules/:id", function(req, res) {
  */
 
 app.get("/api/entities", function(req, res) {
+  console.log("entitied");
   db.collection(ENTITIES_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get entites.");
@@ -116,6 +111,28 @@ app.get("/api/entities", function(req, res) {
       res.status(200).json(docs);
     }
   });
+});
+
+
+app.post("/api/entities", function(req, res) {
+  var newEntity = req.body;
+  newEntity.createDate = new Date().toLocaleString('en-US', {
+    timeZone: 'Europe/Lisbon'
+  });
+
+  console.log("entered");
+
+  if (!newEntity.name || !newEntity.attributes) {
+    handleError(res, "Invalid user input", "Must provide a valid Entity.", 400);
+  } else {
+    db.collection(ENTITIES_COLLECTION).insertOne(newEntity, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new Entity.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
 });
 
 app.get("/config", function(req, res) {

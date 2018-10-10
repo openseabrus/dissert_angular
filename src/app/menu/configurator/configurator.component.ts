@@ -72,13 +72,6 @@ export class ConfiguratorComponent implements OnInit {
       return;
     }
 
-    if (this.trigger.attribute.type !== 'number') {
-      console.log(this.trigger);
-      if (this.trigger.operator) {
-        // delete this.trigger.operator;
-      }
-    }
-
     console.log(this.trigger);
     // delete this.trigger['attribute']['asAction'];
     // delete this.action['attribute']['asAction'];
@@ -92,8 +85,7 @@ export class ConfiguratorComponent implements OnInit {
 
   private isFormValid() {
     return this.action.attribute && this.action.entity && this.action.value &&
-    this.trigger.attribute && this.trigger.entity && this.trigger.value &&
-    (this.trigger.attribute.type === 'number' ? this.trigger.operator : true);
+    this.trigger.attribute && this.trigger.entity && this.trigger.value;
   }
 
 }
