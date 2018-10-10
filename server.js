@@ -103,7 +103,6 @@ app.delete("/api/rules/:id", function(req, res) {
  */
 
 app.get("/api/entities", function(req, res) {
-  console.log("entitied");
   db.collection(ENTITIES_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get entites.");
@@ -120,8 +119,6 @@ app.post("/api/entities", function(req, res) {
     timeZone: 'Europe/Lisbon'
   });
 
-  console.log("entered");
-
   if (!newEntity.name || !newEntity.attributes) {
     handleError(res, "Invalid user input", "Must provide a valid Entity.", 400);
   } else {
@@ -133,6 +130,16 @@ app.post("/api/entities", function(req, res) {
       }
     });
   }
+});
+
+app.delete("/api/entities/:id", function(req, res) {
+  db.collection(ENTITIES_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete entity");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
 });
 
 app.get("/config", function(req, res) {

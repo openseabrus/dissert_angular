@@ -23,7 +23,7 @@ export class EntityService {
     );
   }
 
-  // post("/api/rules")
+  // post("/api/entities")
   createEntity(newEntity: Entity): Observable<void | any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -37,8 +37,14 @@ export class EntityService {
       );
   }
 
+  deleteEntity(_id: string): Observable<{}> {
+    const url = `${this.entitiesURL}/${_id}`;
+    return this.http.delete(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
-    console.log("ERROR");
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
