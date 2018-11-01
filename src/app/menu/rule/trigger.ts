@@ -5,9 +5,8 @@ export class Trigger {
     entity: string;
     attribute: Attribute;
     operator?: string;
-    value: number;
 
-    constructor(entity?: string, attribute?: any, value?: number, operator?: string) {
+    constructor(entity?: string, attribute?: any, operator?: string) {
         this.entity = entity;
         if (attribute) {
             this.attribute = attribute;
@@ -15,6 +14,5 @@ export class Trigger {
             this.attribute = new Attribute;
         }
         this.operator = operator || 'eq';
-        this.value = value;
     }
 }

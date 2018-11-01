@@ -19,9 +19,19 @@ export class ConfiguratorComponent implements OnInit {
   private ACTION = 1;
   private TRIGGER_AND_ACTION = 2;
 
+  /**
+   * entities[] - All entities in the database.
+   * triggerEntity - The entity to be used by variable this.trigger.
+   * actionEntity - The entity to be used by variable this.action.
+   */
   private entities: Entity[];
   private triggerEntity: Entity;
   private actionEntity: Entity;
+
+  /**
+   * Variables used for rule submission.
+   * They get shaped and updated when the user makes changes.
+   */
   private trigger: Trigger;
   private action: Action;
 
@@ -84,8 +94,18 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   private isFormValid() {
-    return this.action.attribute && this.action.entity && this.action.value &&
-    this.trigger.attribute && this.trigger.entity && this.trigger.value;
+    let result: boolean = this.action.attribute != null && this.action.entity != null && this.action.value != null &&
+    this.trigger.attribute != null && this.trigger.entity != null;
+
+    for (const field of this.trigger.attribute.fields) {
+      if (!result) {
+        return result;
+      }
+
+      result = result && field.value != null;
+    }
+
+    return result;
   }
 
 }
