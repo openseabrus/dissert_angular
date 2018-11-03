@@ -11,7 +11,7 @@ export class Trigger {
         if (attribute) {
             this.attribute = attribute;
         } else {
-            this.attribute = new Attribute;
+            this.attribute = new Attribute();
         }
         this.operator = operator || 'eq';
     }

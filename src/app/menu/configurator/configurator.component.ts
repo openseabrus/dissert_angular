@@ -25,6 +25,7 @@ export class ConfiguratorComponent implements OnInit {
    * actionEntity - The entity to be used by variable this.action.
    */
   private entities: Entity[];
+  private entities2: Entity[];
   private triggerEntity: Entity;
   private actionEntity: Entity;
 
@@ -35,14 +36,17 @@ export class ConfiguratorComponent implements OnInit {
   private trigger: Trigger;
   private action: Action;
 
-  constructor(private config: RuleService, private menuCloserService: MenuCloserService, private entityService: EntityService) { }
+  constructor(private config: RuleService, private menuCloserService: MenuCloserService, private entityService: EntityService) {
+  }
 
   ngOnInit() {
     this.entityService.getEntities().subscribe(res => {
       this.entities = res;
+      this.entities2 = JSON.parse(JSON.stringify(res));
+
       if (this.entities.length > 0) {
         this.triggerEntity = this.entities[0];
-        this.actionEntity = this.entities[0];
+        this.actionEntity = this.entities2[0]; // TODO: CHANGE THIS
         this.changeEntity(this.TRIGGER_AND_ACTION);
       }
     });
@@ -94,7 +98,7 @@ export class ConfiguratorComponent implements OnInit {
   }
 
   private isFormValid() {
-    let result: boolean = this.action.attribute != null && this.action.entity != null && this.action.value != null &&
+    let result: boolean = this.action.attribute != null && this.action.entity != null &&
     this.trigger.attribute != null && this.trigger.entity != null;
 
     for (const field of this.trigger.attribute.fields) {
@@ -103,6 +107,14 @@ export class ConfiguratorComponent implements OnInit {
       }
 
       result = result && field.value != null;
+    }
+
+    for (const f of this.action.attribute.fields) {
+      if (!result) {
+        return result;
+      }
+
+      result = result && f.value != null;
     }
 
     return result;

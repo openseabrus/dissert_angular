@@ -4,11 +4,13 @@ export class Action {
     _id?: string;
     entity: string;
     attribute: Attribute;
-    value: number;
 
-    constructor(entity?: string, attribute?: any, value?: number) {
+    constructor(entity?: string, attribute?: any) {
         this.entity = entity;
-        this.attribute = attribute;
-        this.value = value;
+        if (attribute) {
+            this.attribute = attribute;
+        } else {
+            this.attribute = new Attribute();
+        }
     }
 }

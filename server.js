@@ -71,7 +71,7 @@ app.post("/api/rules", function(req, res) {
     delete newRule.trigger['attribute']['asAction'];
     delete newRule.action['attribute']['asAction'];
     // delete newRule.trigger['attribute']['fields'];
-    delete newRule.action['attribute']['fields'];
+    // delete newRule.action['attribute']['fields'];
     delete newRule.trigger.operator;
     db.collection(RULES_COLLECTION).insertOne(newRule, function(err, doc) {
       if (err) {
