@@ -16,4 +16,12 @@ export class Attribute {
         this.fields = [new Field()];
         this._id = UUID.UUID();
     }
+
+    copySelf() {
+        this.fields = new Array(this.fields.length);
+
+        for (let i = 0; i < this.fields.length; i++) {
+            this.fields[i] = Object.assign({}, this.fields[i]);
+        }
+    }
 }
