@@ -6,6 +6,7 @@ var ObjectID = mongodb.ObjectID;
 var CONTACTS_COLLECTION = "contacts";
 var RULES_COLLECTION = "rules";
 var ENTITIES_COLLECTION = "entities";
+var DATABASE_COLLECTION = "database";
 
 var app = express();
 app.use(bodyParser.json());
@@ -194,6 +195,38 @@ app.delete("/api/contacts/:id", function(req, res) {
   });
 });
 
+
+app.get("/api/database", function(req, res) {
+  db.collection(DATABASE_COLLECTION).findOne({}, (function(err, docs) {
+    if (err || !docs) {
+      handleError(res, "Database Not Found.", "No database set.", 404);
+    } else {
+      res.status(200).json(docs);
+    }
+  }));
+});
+
+app.post("/api/database", function(req, res) {
+  var newUrl = req.body;
+  newUrl.setDate = new Date().toLocaleString('en-US', {
+    timeZone: 'Europe/Lisbon'
+  });
+
+  if (!newUrl.link) {
+    handleError(res, "Invalid user input", "Must provide a valid link.", 400);
+  } else {
+    const operation = {
+      $set: newUrl
+    }
+    db.collection(DATABASE_COLLECTION).updateOne({}, operation, { upsert: true }, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to set a new Database Address.");
+      } else {
+        res.status(201).json(doc);
+      }
+    });
+  }
+});
 
 // 404 catch 
 app.all('*', (req, res) => {

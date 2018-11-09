@@ -6,6 +6,7 @@ import { MenuComponent } from './menu.component';
 import { RuleListComponent } from './rule-list/rule-list.component';
 import { EntitiesComponent } from './entities/entities/entities.component';
 import { NewEntityComponent } from './entities/new-entity/new-entity.component';
+import { DatabaseLinkComponent } from './database-link/database-link.component';
 
 const menuRoutes: Routes = [
   { path: '', redirectTo: '/rules', pathMatch: 'full' },
@@ -27,6 +28,10 @@ const menuRoutes: Routes = [
       {
         path: 'entities/new',
         component: NewEntityComponent
+      },
+      {
+        path: 'database',
+        component: DatabaseLinkComponent
       }
     ]
   }
