@@ -9,6 +9,7 @@ import { OnlyActions, OnlyActionAttributes } from './rule/entities/only-actions.
 import { CardComponent } from './rule-list/card/card.component';
 import { EntitiesComponent } from './entities/entities/entities.component';
 import { NewEntityComponent } from './entities/new-entity/new-entity.component';
+import { DatabaseLinkComponent } from './database-link/database-link.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { NewEntityComponent } from './entities/new-entity/new-entity.component';
     OnlyActionAttributes,
     CardComponent,
     EntitiesComponent,
-    NewEntityComponent
+    NewEntityComponent,
+    DatabaseLinkComponent
   ]
 })
 export class MenuModule { }

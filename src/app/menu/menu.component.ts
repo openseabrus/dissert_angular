@@ -44,6 +44,11 @@ export class MenuComponent implements OnInit, OnDestroy {
         name: 'Entities',
         icon: 'far fa-check-square',
         route: 'entities'
+      },
+      {
+        name: 'Database Link',
+        icon: 'fas fa-database',
+        route: 'database'
       }
     ];
     this.menuOpened = false;

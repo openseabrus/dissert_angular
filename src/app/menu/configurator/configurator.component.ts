@@ -14,7 +14,6 @@ import { Entity } from '../rule/entities/entity';
   providers: [RuleService]
 })
 export class ConfiguratorComponent implements OnInit {
-
   private TRIGGER = 0;
   private ACTION = 1;
   private TRIGGER_AND_ACTION = 2;
@@ -36,17 +35,20 @@ export class ConfiguratorComponent implements OnInit {
   private trigger: Trigger;
   private action: Action;
 
-  constructor(private config: RuleService, private menuCloserService: MenuCloserService, private entityService: EntityService) {
-  }
+  constructor(
+    private config: RuleService,
+    private menuCloserService: MenuCloserService,
+    private entityService: EntityService
+  ) {}
 
   ngOnInit() {
     this.entityService.getEntities().subscribe(res => {
       this.entities = res;
-      this.entities2 = JSON.parse(JSON.stringify(res));
+      this.entities2 = JSON.parse(JSON.stringify(res)); // TODO - change this
 
       if (this.entities.length > 0) {
         this.triggerEntity = this.entities[0];
-        this.actionEntity = this.entities2[0]; // TODO: CHANGE THIS
+        this.actionEntity = this.entities2[0];
         this.changeEntity(this.TRIGGER_AND_ACTION);
       }
     });
@@ -93,13 +95,17 @@ export class ConfiguratorComponent implements OnInit {
     // delete this.action['attribute']['fields'];
     console.log(this.trigger);
 
-
-    this.config.createRule(Rule.buildFromElems(this.trigger, this.action)).subscribe();
+    this.config
+      .createRule(Rule.buildFromElems(this.trigger, this.action))
+      .subscribe();
   }
 
   private isFormValid() {
-    let result: boolean = this.action.attribute != null && this.action.entity != null &&
-    this.trigger.attribute != null && this.trigger.entity != null;
+    let result: boolean =
+      this.action.attribute != null &&
+      this.action.entity != null &&
+      this.trigger.attribute != null &&
+      this.trigger.entity != null;
 
     for (const field of this.trigger.attribute.fields) {
       if (!result) {
@@ -119,5 +125,4 @@ export class ConfiguratorComponent implements OnInit {
 
     return result;
   }
-
 }
