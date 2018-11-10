@@ -14,8 +14,8 @@ export class DatabaseLinkService {
   constructor(private http: HttpClient) { }
 
   getDatabase(): Observable<any> {
-    return this.http.get<DatabaseLink>(this.databaseURL).pipe(
-      map(obj => new DatabaseLink(obj.link, obj.setDate))
+    return this.http.get<DatabaseLink>(this.databaseURL, {observe: 'response'}).pipe(
+      catchError(this.handleError)
     );
   }
 
