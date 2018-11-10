@@ -198,8 +198,10 @@ app.delete("/api/contacts/:id", function(req, res) {
 
 app.get("/api/database", function(req, res) {
   db.collection(DATABASE_COLLECTION).findOne({}, (function(err, docs) {
-    if (err || !docs) {
+    if (err) {
       handleError(res, "Database Not Found.", "No database set.", 404);
+    } else if (!docs) {
+      res.status(204).json({});
     } else {
       res.status(200).json(docs);
     }

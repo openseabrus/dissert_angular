@@ -11,18 +11,28 @@ import { DatabaseLink } from './database-link';
 export class DatabaseLinkComponent implements OnInit {
 
   private databaseUrl: string;
-  private linkform: FormGroup;
-  private URL_PATTERN = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+  private currentUrl: DatabaseLink;
 
   constructor(private databaseService: DatabaseLinkService) {}
 
   ngOnInit() {
     this.databaseUrl = '';
+    this.databaseService.getDatabase().subscribe(res => {
+      if (res.body == null || res.status === 204) {
+        this.currentUrl = null;
+      } else if (res.status === 200) {
+        this.currentUrl = new DatabaseLink(res.body.link, res.body.setDate);
+      }
+    }, err => {
+      console.log('Error fetching database.', err);
+    });
   }
 
 
   private submitURL() {
-    this.databaseService.setDatabase(new DatabaseLink(new URL(this.databaseUrl))).subscribe();
+    this.databaseService.setDatabase(new DatabaseLink(new URL(this.databaseUrl))).subscribe(res => {
+      location.reload();
+    });
   }
 
 }
