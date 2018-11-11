@@ -6,6 +6,9 @@ import { Action } from '../rule/action';
 import { MenuCloserService } from '../menu-closer/menu-closer.service';
 import { EntityService } from '../rule/entities/entity-service.service';
 import { Entity } from '../rule/entities/entity';
+import { DatabaseLinkService } from '../database-link/database-link.service';
+import { DatabaseService } from '../database-link/database.service';
+import { Poi } from '../database-link/poi';
 
 @Component({
   selector: 'app-configurator',
@@ -35,94 +38,111 @@ export class ConfiguratorComponent implements OnInit {
   private trigger: Trigger;
   private action: Action;
 
+  /**
+   * Point array fetched on database link.
+   * If there is no link, set the option to false;
+   */
+  private points: Poi[];
+  private showPointOption: boolean;
+
   constructor(
-    private config: RuleService,
-    private menuCloserService: MenuCloserService,
-    private entityService: EntityService
+	private config: RuleService,
+	private menuCloserService: MenuCloserService,
+	private entityService: EntityService,
+	private databaseLinkService: DatabaseLinkService,
+	private databaseService: DatabaseService
   ) {}
 
   ngOnInit() {
-    this.entityService.getEntities().subscribe(res => {
-      this.entities = res;
-      this.entities2 = JSON.parse(JSON.stringify(res)); // TODO - change this
+	this.entityService.getEntities().subscribe(res => {
+		this.entities = res;
+		this.entities2 = JSON.parse(JSON.stringify(res)); // TODO - change this
 
-      if (this.entities.length > 0) {
-        this.triggerEntity = this.entities[0];
-        this.actionEntity = this.entities2[0];
-        this.changeEntity(this.TRIGGER_AND_ACTION);
-      }
-    });
-    this.trigger = new Trigger();
-    this.action = new Action();
+		if (this.entities.length > 0) {
+		this.triggerEntity = this.entities[0];
+		this.actionEntity = this.entities2[0];
+		this.changeEntity(this.TRIGGER_AND_ACTION);
+		}
+  });
+  this.databaseLinkService.getDatabase().subscribe(res => {
+	this.databaseService.getPoints(res.body).subscribe(pois => {
+		this.points = [];
+		for (const point of pois) {
+			this.points.push(new Poi(point.id, point.name, point.latitude, point.longitude, point.description));
+		}
+	});
+  });
+	this.trigger = new Trigger();
+	this.action = new Action();
   }
 
   public setMenu() {
-    this.menuCloserService.contentClick();
+	this.menuCloserService.contentClick();
   }
 
   public changeEntity(action: number, e?: Event) {
-    switch (action) {
-      case this.TRIGGER: {
-        console.log('triggered');
-        this.trigger.entity = this.triggerEntity.name;
-        this.trigger.attribute = this.triggerEntity.attributes[0];
-        break;
-      }
-      case this.ACTION: {
-        console.log('actioned');
-        this.action.entity = this.actionEntity.name;
-        this.action.attribute = this.actionEntity.attributes[0];
-        break;
-      }
-      default: {
-        this.trigger.entity = this.triggerEntity.name;
-        this.trigger.attribute = this.triggerEntity.attributes[0];
-        this.action.entity = this.actionEntity.name;
-        this.action.attribute = this.actionEntity.attributes[0];
-      }
-    }
+	switch (action) {
+		case this.TRIGGER: {
+		console.log('triggered');
+		this.trigger.entity = this.triggerEntity.name;
+		this.trigger.attribute = this.triggerEntity.attributes[0];
+		break;
+		}
+		case this.ACTION: {
+		console.log('actioned');
+		this.action.entity = this.actionEntity.name;
+		this.action.attribute = this.actionEntity.attributes[0];
+		break;
+		}
+		default: {
+		this.trigger.entity = this.triggerEntity.name;
+		this.trigger.attribute = this.triggerEntity.attributes[0];
+		this.action.entity = this.actionEntity.name;
+		this.action.attribute = this.actionEntity.attributes[0];
+		}
+	}
   }
 
   public submitRule() {
-    if (!this.isFormValid()) {
-      return;
-    }
+	if (!this.isFormValid()) {
+		return;
+	}
 
-    console.log(this.trigger);
-    // delete this.trigger['attribute']['asAction'];
-    // delete this.action['attribute']['asAction'];
-    // delete this.trigger['attribute']['fields'];
-    // delete this.action['attribute']['fields'];
-    console.log(this.trigger);
+	console.log(this.trigger);
+	// delete this.trigger['attribute']['asAction'];
+	// delete this.action['attribute']['asAction'];
+	// delete this.trigger['attribute']['fields'];
+	// delete this.action['attribute']['fields'];
+	console.log(this.trigger);
 
-    this.config
-      .createRule(Rule.buildFromElems(this.trigger, this.action))
-      .subscribe();
+	this.config
+		.createRule(Rule.buildFromElems(this.trigger, this.action))
+		.subscribe();
   }
 
   private isFormValid() {
-    let result: boolean =
-      this.action.attribute != null &&
-      this.action.entity != null &&
-      this.trigger.attribute != null &&
-      this.trigger.entity != null;
+	let result: boolean =
+		this.action.attribute != null &&
+		this.action.entity != null &&
+		this.trigger.attribute != null &&
+		this.trigger.entity != null;
 
-    for (const field of this.trigger.attribute.fields) {
-      if (!result) {
-        return result;
-      }
+	for (const field of this.trigger.attribute.fields) {
+		if (!result) {
+		return result;
+		}
 
-      result = result && field.value != null;
-    }
+		result = result && field.value != null;
+	}
 
-    for (const f of this.action.attribute.fields) {
-      if (!result) {
-        return result;
-      }
+	for (const f of this.action.attribute.fields) {
+		if (!result) {
+		return result;
+		}
 
-      result = result && f.value != null;
-    }
+		result = result && f.value != null;
+	}
 
-    return result;
+	return result;
   }
 }

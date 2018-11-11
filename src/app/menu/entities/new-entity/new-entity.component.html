@@ -49,14 +49,13 @@
 
                 <label for="field-type">Value Type</label>
                 <select id="field-type" name="field-type" class="pure-u-1" [(ngModel)]="field.type">
-                  <option value="string">String</option>
-                  <option value="number">Integer</option>
-                  <option value="double">Double</option>
-                  <option value="boolean">Boolean</option>
+                  <option *ngFor="let opt of valueTypes" [value]="opt.value">{{opt.name}}</option>
                 </select>
 
-                <label for="field-unit">Value Unit (May be left empty)</label>
-                <input class="pure-u-1" id="field-unit" name="field-unit" [(ngModel)]="field.unit" placeholder="km/h"/>
+                <div *ngIf="!field.type?.startsWith('$')">
+                  <label for="field-unit">Value Unit (May be left empty)</label>
+                  <input class="pure-u-1" id="field-unit" name="field-unit" [(ngModel)]="field.unit" placeholder="km/h"/>
+                </div>
               </div>
             </fieldset>
           </div>
