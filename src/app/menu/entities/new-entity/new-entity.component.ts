@@ -11,6 +11,26 @@ import { EntityService } from '../../rule/entities/entity-service.service';
 export class NewEntityComponent implements OnInit {
 
   private entity: Entity;
+  private valueTypes = [{
+    name: 'String',
+    value: 'string'
+  },
+  {
+    name: 'Integer',
+    value: 'number'
+  },
+  {
+    name: 'Double',
+    value: 'double'
+  },
+  {
+    name: 'Boolean',
+    value: 'boolean'
+  },
+  {
+    name: 'Points from Database',
+    value: '$database'
+  }];
 
   constructor(private entityService: EntityService) { }
 

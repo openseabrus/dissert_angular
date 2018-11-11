@@ -16,7 +16,7 @@
                 name="current-link"
                 pattern="https?://.+"
                 [(ngModel)]="currentUrl.link"
-                disabled
+                readonly
               />
               <p>URL set on {{currentUrl.setDate | date: 'd MMM yyyy, HH:mm'}}</p>
             </div>
@@ -44,6 +44,7 @@
             >
               <i class="far fa-check-circle"></i>
             </button>
+            <p class="link-warning pure-u-1">Warning: The server's endpoint must allow <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">Cross-Origin Resource Sharing</a> on the platform's domain ({{document.location.protocol + '//' + document.location.hostname}}).</p> 
           </div>
         </div>
       </fieldset>
