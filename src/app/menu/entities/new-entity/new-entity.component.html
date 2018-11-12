@@ -18,7 +18,7 @@
         </div>
       </fieldset>
 
-      <div *ngFor="let attribute of entity.attributes; let i = index">
+      <div *ngFor="let attribute of entity.attributes; let i = index;">
         <fieldset>
           <legend>Attribute #{{i + 1}} ({{attribute._id}})</legend>
           <div class="pure-g">
@@ -43,23 +43,41 @@
               </div>
             </div>
 
-            <fieldset class="pure-u-4-5">
-              <legend>Attribute's Value (Values are defined during rule creation)</legend>
-              <div *ngFor="let field of attribute.fields" class="pure-u-23-24">
+            <fieldset *ngFor="let field of attribute.fields; let j = index" class="pure-u-4-5">
+              <legend>Attribute's Value #{{j + 1}} ({{field.id}})</legend>
+              <div class="pure-u-23-24">
 
-                <label for="field-type">Value Type</label>
-                <select id="field-type" name="field-type" class="pure-u-1" [(ngModel)]="field.type">
-                  <option *ngFor="let opt of valueTypes" [value]="opt.value">{{opt.name}}</option>
-                </select>
-
-                <div *ngIf="!field.type?.startsWith('$')">
-                  <label for="field-unit">Value Unit (May be left empty)</label>
-                  <input class="pure-u-1" id="field-unit" name="field-unit" [(ngModel)]="field.unit" placeholder="km/h"/>
+                <div class="pure-u-4-5">
+                  <label for="field-name-{{j}}">Value Name (e.g. Latitude, Longitude, Visibility, etc)</label>
+                  <input class="pure-u-1" id="field-name-{{j}}" name="field-name-{{j}}" [(ngModel)]="field.name" placeholder="Longitude" />
                 </div>
+
+                <div class="pure-u-1-5">
+                  <button (click)="removeField(attribute, j)" *ngIf="attribute.fields.length > 1" class="pure-button button-error right"><i
+                      class="fas fa-trash-alt"></i></button>
+                </div>
+
+                <div class="pure-u-4-5">
+                  <label for="field-type-{{j}}">Value Type</label>
+                  <select id="field-type-{{j}}" name="field-type-{{j}}" class="pure-u-1" [(ngModel)]="field.type">
+                    <option *ngFor="let opt of valueTypes" [value]="opt.value">{{opt.name}}</option>
+                  </select>
+                </div>
+
+                <div *ngIf="!field.type?.startsWith('$')" class="pure-u-4-5">
+                  <label for="field-unit-{{j}}">Value Unit (May be left empty)</label>
+                  <input class="pure-u-1" id="field-unit-{{j}}" name="field-unit-{{j}}" [(ngModel)]="field.unit" placeholder="km/h" />
+                </div>
+                
               </div>
             </fieldset>
           </div>
         </fieldset>
+        <div class="buttons pure-u-4-5" style="margin-bottom: 15px;">
+          <button (click)="addField(attribute)" class="pure-button button-secondary"><i class="fas fa-plus-circle"></i>
+            Add
+            Attribute Value</button>
+        </div>
       </div>
       <div class="pure-g">
         <div class="buttons pure-u-1 pure-u-lg-1-2">
