@@ -132,7 +132,6 @@
                   [(ngModel)]="field.value"
                   class="pure-u-1"
                 >
-                  <option disabled>Choose a POI</option>
                   <option *ngFor="let poi of points">{{ poi.name }}</option>
                 </select>
               </div>
@@ -163,6 +162,7 @@
                   [ngValue]="entity"
                   >{{ entity.name }}</option
                 >
+                <option *ngIf="containsDatabase()" [ngValue]="POINT_ENTITY">{{trigger.attribute.fields[0].value}}</option>
               </select>
             </div>
           </div>

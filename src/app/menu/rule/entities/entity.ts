@@ -11,9 +11,6 @@ export class Entity {
 		}
 		this.name = e.name;
 		this.attributes = e.attributes;
-		for (let i = 0; i < this.attributes.length; i++) {
-			this.attributes[i].copySelf();
-		}
 	}
 
 	public static emptyEntity(): Entity {
@@ -24,11 +21,5 @@ export class Entity {
 		};
 
 		return new Entity(ent);
-	}
-
-	copySelf() {
-		for (let i = 0; i < this.attributes.length; i++) {
-			this.attributes[i].copySelf();
-		}
 	}
 }
