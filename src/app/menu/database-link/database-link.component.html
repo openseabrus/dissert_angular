@@ -1,6 +1,8 @@
 <!-- <div id="main" [ngClass]="{active: menuOpened}" (click)="setMenu()"> -->
 <div id="main">
-  <div class="header"><h1>Database Link</h1></div>
+  <div class="header">
+    <h1>Database Link</h1>
+  </div>
 
   <div class="content">
     <h2 class="content-subhead">Database POI list Endpoint</h2>
@@ -9,42 +11,25 @@
         <div class="pure-g">
           <div class="pure-u-1">
             <div class="pure-u-23-24 pure-u-lg-15-24" *ngIf="currentUrl">
-                <label class="pure-u-1" id="current-label" for="current-link">Current Database URL</label>
-                <input
-                class="pure-input-1"
-                id="current-link"
-                name="current-link"
-                pattern="https?://.+"
-                [(ngModel)]="currentUrl.link"
-                readonly
-              />
+              <label class="pure-u-1" id="current-label" for="current-link">Current Database URL</label>
+              <input class="pure-input-1" id="current-link" name="current-link" pattern="https?://.+" [(ngModel)]="currentUrl.link"
+                readonly />
               <p>URL set on {{currentUrl.setDate | date: 'd MMM yyyy, HH:mm'}}</p>
             </div>
 
-            <label class="pure-u-1" for="database-link" [ngStyle]="{'margin-top': currentUrl ? '100px' : '0px'}">New Database URL</label>
+            <label class="pure-u-1" for="database-link" [ngStyle]="{'margin-top': currentUrl ? '100px' : '0px'}">New
+              Database URL</label>
             <div class="pure-u-21-24 pure-u-lg-15-24">
-              <input
-                class="pure-input-1"
-                id="database-link"
-                name="database-link"
-                type="url"
-                [(ngModel)]="databaseUrl"
-                required
-                #dblink="ngModel"
-                pattern="https?://.+"
-                placeholder="http://example.com/api/pois"
-              />
+              <input class="pure-input-1" id="database-link" name="database-link" type="url" [(ngModel)]="databaseUrl"
+                required #dblink="ngModel" pattern="https?://.+" placeholder="http://example.com/api/pois" />
             </div>
-            <button
-              id="submit-link"
-              (click)="submitURL()"
-              type="submit"
-              class="pure-button pure-button-primary button-success"
-              [disabled]="dblink.invalid"
-            >
+            <button id="submit-link" (click)="submitURL()" type="submit" class="pure-button pure-button-primary button-success"
+              [disabled]="dblink.invalid">
               <i class="far fa-check-circle"></i>
             </button>
-            <p class="link-warning pure-u-1">Warning: The server's endpoint must allow <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">Cross-Origin Resource Sharing</a> on the platform's domain ({{document.location.protocol + '//' + document.location.hostname}}).</p> 
+            <p class="link-warning pure-u-1">Warning: The server's endpoint must allow <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing"
+                target="_blank">Cross-Origin Resource Sharing</a> on the platform's domain
+              ({{document.location.protocol + '//' + document.location.hostname}}).</p>
           </div>
         </div>
       </fieldset>
