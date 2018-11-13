@@ -27,6 +27,7 @@ export class ConfiguratorComponent implements OnInit {
 		name: null,
 		attributes: [
 			{
+				asAction: true,
 				name: 'Opacity',
 				fields: [
 					{
@@ -36,6 +37,7 @@ export class ConfiguratorComponent implements OnInit {
 				]
 			},
 			{
+				asAction: true,
 				name: 'Rotation',
 				fields: [
 					{
@@ -119,6 +121,7 @@ export class ConfiguratorComponent implements OnInit {
 				const t = e ? e : this.triggerEntity;
 				this.trigger.entity = (t as Entity).name;
 				this.trigger.attribute = (t as Entity).attributes[0];
+				console.log(this.trigger);
 				break;
 			}
 			case this.ACTION: {
