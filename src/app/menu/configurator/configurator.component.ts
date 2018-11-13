@@ -144,7 +144,7 @@ export class ConfiguratorComponent implements OnInit {
 
 	public submitRule() {
 		if (!this.isFormValid()) {
-			return;
+			// return;
 		}
 
 		console.log(this.trigger);

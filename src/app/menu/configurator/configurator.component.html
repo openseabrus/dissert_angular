@@ -6,7 +6,7 @@
 
   <div class="content">
     <h2 class="content-subhead">New Rule</h2>
-    <form class="pure-form pure-form-stacked">
+    <form class="pure-form pure-form-stacked" #ruleform="ngForm">
       <fieldset>
         <legend>Trigger</legend>
 
@@ -18,7 +18,7 @@
                 <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map">
               -->
               <select id="trigger-entity" name="trigger-entity" [(ngModel)]="triggerEntity" (ngModelChange)="changeEntity(0, $event)"
-                class="pure-u-1">
+                class="pure-u-1" required #triggerentity="ngModel">
                 <option *ngFor="let entity of entities" [ngValue]="entity">{{
                   entity.name
                   }}</option>
@@ -32,7 +32,7 @@
               <!--
                 <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map">
               -->
-              <select id="trigger-entity-property" name="trigger-entity-property" [(ngModel)]="trigger.attribute" class="pure-u-1">
+              <select id="trigger-entity-property" name="trigger-entity-property" [(ngModel)]="trigger.attribute" class="pure-u-1" required #triggerattr="ngModel">
                 <option *ngFor="let attribute of triggerEntity.attributes" [ngValue]="attribute">{{ attribute.name }}</option>
               </select>
             </div>
@@ -59,9 +59,9 @@
                   {{ field.unit ? "(" + field.unit + ")" : "" }}</label>
                 <input *ngIf="!field.type.startsWith('$')" [(ngModel)]="field.value" id="trigger-value-{{i}}" name="trigger-value-{{i}}"
                   class="pure-u-1" placeholder="0" type="{{field.type ? (field.type == 'number' || field.type == 'text' ? field.type : 'number') : 'number'}}"
-                  step="{{field.type == 'double' ? 0.0001 : 1}}" />
+                  step="{{field.type == 'double' ? 0.0001 : 1}}" required #triggervalue="ngModel" />
                 <select *ngIf="field.type.startsWith('$')" id="trigger-value-{{i}}-select" name="trigger-value-{{i}}"
-                  [(ngModel)]="field.value" class="pure-u-1">
+                  [(ngModel)]="field.value" class="pure-u-1" required #triggervalue2="ngModel">
                   <option *ngFor="let poi of points">{{ poi.name }}</option>
                 </select>
               </div>
@@ -81,9 +81,10 @@
                 <input [(ngModel)]="tEntity" id="trigger-entity" name="trigger-entity" class="pure-u-1" type="text" placeholder="map">
               -->
               <select id="action-entity" [(ngModel)]="actionEntity" (ngModelChange)="changeEntity(1, $event)" name="action-entity"
-                class="pure-u-1">
+                class="pure-u-1" required #actionentity="ngModel">
                 <option *ngFor="let entity of (entities2 | onlyActions)" [ngValue]="entity">{{ entity.name }}</option>
-                <option *ngIf="containsDatabase() && trigger.attribute.fields[0].value" [ngValue]="POINT_ENTITY">{{trigger.attribute.fields[0].value}} (Marker)</option>
+                <option *ngIf="containsDatabase() && trigger.attribute.fields[0].value" [ngValue]="POINT_ENTITY">{{trigger.attribute.fields[0].value}}
+                  (Marker)</option>
               </select>
             </div>
           </div>
@@ -91,7 +92,7 @@
           <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="actionEntity">
             <div class="pure-u-23-24">
               <label for="action-entity-property">Entity Attribute</label>
-              <select id="action-entity-property" name="action-entity-property" [(ngModel)]="action.attribute" class="pure-u-1">
+              <select id="action-entity-property" name="action-entity-property" [(ngModel)]="action.attribute" class="pure-u-1" required #actionattr="ngModel">
                 <ng-container *ngIf="!containsDatabase() || action.entity !== POINT_ENTITY.name || action.entity !== trigger.attribute.fields[0].value">
                   <option *ngFor="let attribute of (actionEntity.attributes | onlyActionAttributes)" [ngValue]="attribute">{{
                     attribute.name }}</option>
@@ -110,7 +111,7 @@
                   {{ field.unit ? "(" + field.unit + ")" : "" }}</label>
                 <input [(ngModel)]="field.value" id="action-value-{{i}}" name="action-value-{{i}}" class="pure-u-1"
                   placeholder="0" type="{{field.type ? (field.type == 'number' || field.type == 'text' ? field.type : 'number') : 'number'}}"
-                  step="{{field.type == 'double' ? 0.0001 : 1}}" />
+                  step="{{field.type == 'double' ? 0.0001 : 1}}" required #triggervalue="ngModel" />
                 <!-- <select
                   *ngIf="field.type.startsWith('$')"
                   id="action-value-{{i}}-select"
@@ -125,7 +126,7 @@
           </div>
         </div>
       </fieldset>
-      <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [ngClass]="{ 'pure-button-disabled': !isFormValid() }">
+      <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [disabled]="!ruleform.form.valid">
         <i class="far fa-check-circle"></i> Submit
       </button>
     </form>
