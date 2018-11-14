@@ -10,6 +10,7 @@ import { DatabaseLinkService } from '../database-link/database-link.service';
 import { DatabaseService } from '../database-link/database.service';
 import { Poi } from '../database-link/poi';
 import { Attribute } from '@angular/compiler';
+import { Field } from '../rule/attribute/field';
 
 @Component({
 	selector: 'app-configurator',
@@ -21,6 +22,9 @@ export class ConfiguratorComponent implements OnInit {
 	private TRIGGER = 0;
 	private ACTION = 1;
 	private TRIGGER_AND_ACTION = 2;
+	private POINT = 3;
+
+	private pointer: any;
 
 
 	private POINT_ENTITY: Entity = {
@@ -102,6 +106,14 @@ export class ConfiguratorComponent implements OnInit {
 		});
 		this.trigger = new Trigger();
 		this.action = new Action();
+		this.pointer = -1;
+	}
+
+	private changePoint(e: any, j: Field) {
+		j.value = e.name;
+		j.id = e.id;
+		console.log(this.trigger);
+		console.log(this.action);
 	}
 
 	public setMenu() {
@@ -122,6 +134,7 @@ export class ConfiguratorComponent implements OnInit {
 				this.trigger.entity = (t as Entity).name;
 				this.trigger.attribute = (t as Entity).attributes[0];
 				console.log(this.trigger);
+				console.log(this.action);
 				break;
 			}
 			case this.ACTION: {
@@ -129,6 +142,8 @@ export class ConfiguratorComponent implements OnInit {
 				const a = e ? e : this.actionEntity;
 				this.action.entity = (a as Entity).name;
 				this.action.attribute = (a as Entity).attributes[0];
+				console.log(this.trigger);
+				console.log(this.action);
 				break;
 			}
 			default: {
@@ -138,6 +153,8 @@ export class ConfiguratorComponent implements OnInit {
 				this.trigger.attribute = (t as Entity).attributes[0];
 				this.action.entity = (a as Entity).name;
 				this.action.attribute = (a as Entity).attributes[0];
+				console.log(this.trigger);
+				console.log(this.action);
 			}
 		}
 	}
