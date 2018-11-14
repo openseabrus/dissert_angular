@@ -35,8 +35,8 @@
             </div>
             <div class="pure-u-4-5">
               <div class="pure-u-23-24">
-                <label for="attribute-actionable">Actionable? (i.e. Can the device change the attribute value?)</label>
-                <select id="attribute-actionable" name="attribute-actionable" class="pure-u-1" [(ngModel)]="attribute.asAction">
+                <label for="attribute-actionable-{{i}}">Actionable? (i.e. Can the device change the attribute value?)</label>
+                <select id="attribute-actionable-{{i}}" name="attribute-actionable-{{i}}" class="pure-u-1" [(ngModel)]="attribute.asAction">
                   <option value="true">Yes</option>
                   <option value="false">No</option>
                 </select>
@@ -48,8 +48,8 @@
               <div class="pure-u-23-24">
 
                 <div class="pure-u-4-5">
-                  <label for="field-name-{{j}}">Value Name (e.g. Latitude, Longitude, Visibility, etc)</label>
-                  <input class="pure-u-1" id="field-name-{{j}}" name="field-name-{{j}}" [(ngModel)]="field.name" placeholder="Longitude" />
+                  <label for="field-name-{{i}}-{{j}}">Value Name (e.g. Latitude, Longitude, Visibility, etc)</label>
+                  <input class="pure-u-1" id="field-name-{{i}}-{{j}}" name="field-name-{{i}}-{{j}}" [(ngModel)]="field.name" placeholder="Longitude" />
                 </div>
 
                 <div class="pure-u-1-5">
@@ -58,15 +58,15 @@
                 </div>
 
                 <div class="pure-u-4-5">
-                  <label for="field-type-{{j}}">Value Type</label>
-                  <select id="field-type-{{j}}" name="field-type-{{j}}" class="pure-u-1" [(ngModel)]="field.type">
+                  <label for="field-type-{{i}}-{{j}}">Value Type</label>
+                  <select id="field-type-{{i}}-{{j}}" name="field-type-{{i}}-{{j}}" class="pure-u-1" [(ngModel)]="field.type">
                     <option *ngFor="let opt of valueTypes" [value]="opt.value">{{opt.name}}</option>
                   </select>
                 </div>
 
                 <div *ngIf="!field.type?.startsWith('$')" class="pure-u-4-5">
-                  <label for="field-unit-{{j}}">Value Unit (May be left empty)</label>
-                  <input class="pure-u-1" id="field-unit-{{j}}" name="field-unit-{{j}}" [(ngModel)]="field.unit" placeholder="km/h" />
+                  <label for="field-unit-{{i}}-{{j}}">Value Unit (May be left empty)</label>
+                  <input class="pure-u-1" id="field-unit-{{i}}-{{j}}" name="field-unit-{{i}}-{{j}}" [(ngModel)]="field.unit" placeholder="km/h" />
                 </div>
                 
               </div>
