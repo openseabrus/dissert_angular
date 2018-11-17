@@ -16,9 +16,9 @@
 
           <h3 class="trigger-action" style="margin-top: 50px;">Action</h3>
           <div class="rule-content">
-            <p><span class="property">Entity:</span> {{rule.action.entity}}</p>
+            <p><span class="property">Entity:</span> {{rule.action.entity ? rule.action.entity : rule.trigger.attribute.fields[0].value + ' (Marker)'}}</p>
             <p><span class="property">Attribute:</span> {{rule.action.attribute.name}}</p>
-            <p><span class="property">New Value:</span> {{rule.action.value}} {{rule.action.attribute.unit ?
+            <p><span class="property">New Value:</span> {{rule.action.attribute.fields[0].value}} {{rule.action.attribute.unit ?
               rule.action.attribute.unit : ""}}</p>
             <p><span class="property">Created:</span> {{rule.createDate | date: 'd MMM yyyy, HH:mm'}}</p>
           </div>
