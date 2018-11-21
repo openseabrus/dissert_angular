@@ -4,6 +4,7 @@ export class Poi {
 	description?: string;
 	latitude: number;
 	longitude: number;
+	abstractPoi?: boolean;
 
 	constructor(id: number, name: string, latitude: number, longitude: number, description?: string) {
 		this.id = id;

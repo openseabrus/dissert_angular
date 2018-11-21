@@ -231,6 +231,11 @@ app.post("/api/database", function(req, res) {
   }
 });
 
+
+app.get("/api/test", function(req, res) {
+  
+});
+
 // 404 catch 
 app.all('*', (req, res) => {
   console.log(`[TRACE] Server 404 request: ${req.originalUrl}`);
