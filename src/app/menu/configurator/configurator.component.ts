@@ -77,6 +77,14 @@ export class ConfiguratorComponent implements OnInit {
 	private points: Poi[];
 	private showPointOption: boolean;
 
+	private abstractPoi: Poi = {
+		id: 0,
+		name: 'All POIs, individually',
+		latitude: null,
+		longitude: null,
+		abstractPoi: true
+	};
+
 	constructor(
 		private config: RuleService,
 		private menuCloserService: MenuCloserService,
@@ -133,6 +141,8 @@ export class ConfiguratorComponent implements OnInit {
 				const t = e ? e : this.triggerEntity;
 				this.trigger.entity = (t as Entity).name;
 				this.trigger.attribute = (t as Entity).attributes[0];
+				this.action.entity = this.entities2[0].name;
+				this.action.attribute = this.entities2[0].attributes[0];
 				console.log(this.trigger);
 				console.log(this.action);
 				break;
@@ -164,11 +174,6 @@ export class ConfiguratorComponent implements OnInit {
 			// return;
 		}
 
-		console.log(this.trigger);
-		// delete this.trigger['attribute']['asAction'];
-		// delete this.action['attribute']['asAction'];
-		// delete this.trigger['attribute']['fields'];
-		// delete this.action['attribute']['fields'];
 		console.log(this.trigger);
 
 		this.config
@@ -216,5 +221,13 @@ export class ConfiguratorComponent implements OnInit {
 			}
 		}
 		return false;
+	}
+
+
+	private showMarkerAttributes() {
+		const res = this.containsDatabase() && this.action.entity === this.POINT_ENTITY.name &&
+		this.action.entity === this.trigger.attribute.fields[0].value &&
+		this.trigger.attribute.fields[0].type.startsWith('$');
+		return res;
 	}
 }
