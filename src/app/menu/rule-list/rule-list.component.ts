@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Rule } from '../rule/rule';
+// import { Rule } from '../rule/rule';
 import { RuleService } from '../rule/rule-service.service';
-import { EntityService } from '../rule/entities/entity-service.service';
+import { EntityService } from '../../services/entity/entity-service.service';
 import {
   trigger,
   state,
@@ -27,7 +27,7 @@ import {
 })
 export class RuleListComponent implements OnInit {
 
-  rules: Rule[];
+  rules: any[]; // Rule[];
   ruleStates: boolean[];
 
   constructor(private ruleService: RuleService, private entityService: EntityService) { }

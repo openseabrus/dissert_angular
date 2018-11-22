@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { DatabaseLinkService } from './database-link.service';
+import { DatabaseLinkService } from '../../services/database/database-link.service';
 
 describe('DatabaseLinkService', () => {
   beforeEach(() => {

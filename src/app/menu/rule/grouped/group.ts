@@ -7,6 +7,11 @@ export class Group {
 
 	constructor(entity?: string, attributes?: any[]) {
 		this.entity = entity;
-		this.attributes = attributes;
+
+		if (attributes) {
+			this.attributes = attributes;
+		} else {
+			this.attributes = [new Attribute()];
+		}
 	}
 }
