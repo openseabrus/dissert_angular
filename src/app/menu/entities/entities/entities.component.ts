@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Entity } from '../../rule/entities/entity';
-import { EntityService } from '../../rule/entities/entity-service.service';
+import { Entity } from '../entity';
+import { EntityService } from '../../../services/entity/entity-service.service';
 
 @Component({
   selector: 'app-entities',

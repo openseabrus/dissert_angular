@@ -1,9 +1,9 @@
-import { Attribute } from '../attribute/attribute';
+import { EntityAttribute } from './attribute/entity-attribute';
 
 export class Entity {
 	_id?: string;
 	name: string;
-	attributes: Attribute[];
+	attributes: EntityAttribute[];
 
 	constructor(e: any) {
 		if (e._id) {
@@ -14,7 +14,7 @@ export class Entity {
 	}
 
 	public static emptyEntity(): Entity {
-		const attr: Attribute = new Attribute();
+		const attr: EntityAttribute = new EntityAttribute();
 		const ent = {
 			name: null,
 			attributes: [attr]

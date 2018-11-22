@@ -1,7 +1,7 @@
-import { Field } from './field';
+import { Field } from './field/field';
 import { UUID } from 'angular2-uuid';
 
-export class Attribute {
+export class EntityAttribute {
 	_id?: string;
 	name: string;
 	asAction?: boolean;

@@ -6,7 +6,11 @@ export class AttributeSimple {
 	name: string;
 
 	constructor(fields?: any[], name?: string) {
-		this.fields = fields;
+		if (fields) {
+			this.fields = fields;
+		} else {
+			this.fields = [new Field()];
+		}
 		this.name = name;
 	}
 }

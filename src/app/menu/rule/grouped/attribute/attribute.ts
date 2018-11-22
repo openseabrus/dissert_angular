@@ -7,6 +7,11 @@ export class Attribute {
 
 	constructor(name?: string, rules?: any[]) {
 		this.name = name;
-		this.rules = rules;
+
+		if (rules) {
+			this.rules = rules;
+		} else {
+			this.rules = [new Rule()];
+		}
 	}
 }

@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-import { DatabaseLink } from './database-link';
+import { DatabaseLink } from '../../menu/database-link/database-link';
 
 @Injectable({
   providedIn: 'root'
