@@ -153,6 +153,7 @@ export class NewRuleComponent implements OnInit {
 		group.entity = this.chosenTrigger.name;
 		group.attributes[0].name = this.chosenTriggerAttribute.name;
 
+		group.attributes[0].rules[0].generateUUID();
 		group.attributes[0].rules[0].triggerFields = [];
 		while (group.attributes[0].rules[0].triggerFields.length < this.chosenTriggerAttribute.fields.length) {
 			group.attributes[0].rules[0].triggerFields.push(new Field());
