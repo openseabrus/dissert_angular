@@ -30,6 +30,23 @@ export class GroupService {
 		);
 	}
 
+	deleteRule(groupId, attributeName, ruleId): Observable<void | any> {
+		const url = `${this.rulesURL}/${groupId}/${attributeName}/${ruleId}`;
+		return this.http.delete(url).pipe(
+			catchError(this.handleError)
+		);
+	}
+
+	/**
+	 * 
+deleteRule(_id: string): Observable<{}> {
+	const url = `${this.rulesURL}/${_id}`;
+	return this.http.delete(url).pipe(
+		catchError(this.handleError)
+	);
+  }
+	 */
+
 	private handleError(error: HttpErrorResponse) {
 		if (error.error instanceof ErrorEvent) {
 			// A client-side or network error occurred. Handle it accordingly.
