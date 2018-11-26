@@ -2,7 +2,6 @@ import { Attribute } from './attribute/attribute';
 
 export class Group {
 
-	_id?: string;
 	entity: string;
 	attributes: Attribute[];
 
