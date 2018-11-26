@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Entity } from '../entity';
-import { EntityAttribute } from '../attribute/entity-attribute';
-import { EntityService } from '../../../services/entity/entity-service.service';
-import { Field } from '../attribute/field/field';
+import { Entity } from '../../rule/entities/entity';
+import { Attribute } from '../../rule/attribute/attribute';
+import { EntityService } from '../../rule/entities/entity-service.service';
+import { Field } from '../../rule/attribute/field';
 
 @Component({
 	selector: 'app-new-entity',
@@ -41,18 +41,18 @@ export class NewEntityComponent implements OnInit {
 	}
 
 	private addAttribute() {
-		this.entity.attributes.push(new EntityAttribute());
+		this.entity.attributes.push(new Attribute());
 	}
 
 	private removeAttribute(index: number) {
 		this.entity.attributes.splice(index, 1);
 	}
 
-	private addField(attr: EntityAttribute) {
+	private addField(attr: Attribute) {
 		attr.fields.push(new Field());
 	}
 
-	private removeField(attr: EntityAttribute, index: number) {
+	private removeField(attr: Attribute, index: number) {
 		attr.fields.splice(index, 1);
 	}
 

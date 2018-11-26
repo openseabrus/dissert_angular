@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Rule } from './rule';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Trigger } from './trigger';
 import { Action } from './action';
-import { Rule } from './grouped/attribute/rule/rule';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,13 @@ export class RuleService {
 
   // get("/api/rules")
   getRules(): Observable<Rule[]> {
-	return this.http.get<Rule[]>(this.rulesURL).pipe(
-		catchError(this.handleError)
+	const httpOptions = {
+		headers: new HttpHeaders({
+		'Accept':  'application/json'
+		})
+	};
+	return this.http.get<Array<Rule>>(this.rulesURL).pipe(
+		map(obj => obj.map( o => new Rule(o)))
 	);
   }
 

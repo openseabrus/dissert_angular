@@ -65,51 +65,24 @@ app.post("/api/rules", function(req, res) {
   newRule.createDate = new Date().toLocaleString('en-US', {
     timeZone: 'Europe/Lisbon'
   });
-  
 
-	if (!newRule.entity) {
-		handleError(res, "Invalid user input", "Must provide a trigger and action.", 400);
-	} else {
-		var attributeName = newRule.attributes[0].name;
-		db.collection(RULES_COLLECTION).findOneAndUpdate(
-			{ entity: newRule.entity , 'attributes.name': newRule.attributes[0].name },
-			{ $push: { 'attributes.$[e].rules': newRule.attributes[0].rules[0] } },
-			{ arrayFilters: [ { 'e.name': newRule.attributes[0].name }], upsert: true, returnOriginal: false }, 
-			function(err, result) {
-				if (err) {
-					if (err.message === "The positional operator did not find the match needed from the query.") {
-						db.collection(RULES_COLLECTION).insertOne(newRule, function (insertError, insertResult) {
-							if (insertError) {
-								handleError(res, err.message, err, 667);
-							} else {
-								res.status(201).json(insertResult);
-							}
-						})
-					}
-					
-					if (err.message.startsWith('Cannot apply array updates to non-array element')) {
-						db.collection(RULES_COLLECTION).findOneAndUpdate(
-							{ entity: newRule.entity },
-							{ $push: { 'attributes': newRule.attributes[0] }},
-							{ upsert: true, returnOriginal: false },
-							function(attrError, attrResult) {
-								if (attrError) {
-									handleError(res, err.message, err, 667);
-								} else {
-									res.status(202).json(attrResult);
-								}
-							}
-						)
-					} else {
-						console.log(err);
-						handleError(res, err.message, err, 666);
-					}
-
-				} else{
-					res.status(200).json(result);
-				}
-			})
-	}
+  if (!req.body.trigger || !req.body.action) {
+    handleError(res, "Invalid user input", "Must provide a trigger and action.", 400);
+  } else {
+    delete newRule.trigger['attribute']['asAction'];
+    delete newRule.trigger['attribute']['asAction'];
+    delete newRule.action['attribute']['asAction'];
+    // delete newRule.trigger['attribute']['fields'];
+    // delete newRule.action['attribute']['fields'];
+    delete newRule.trigger.operator;
+    db.collection(RULES_COLLECTION).insertOne(newRule, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new rule.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
 });
 
 app.delete("/api/rules/:id", function(req, res) {
