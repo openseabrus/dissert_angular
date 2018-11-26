@@ -13,6 +13,7 @@
 
 .trigger-action {
     font-size: 19px;
+
 }
 
 .center {
@@ -22,23 +23,10 @@
 }
 
 .property {
-    font-weight: bold;
+    font-weight: 600;
     margin-left: 15px;
 }
 
 .pure-g {
     justify-content: space-between;
-}
-
-.attribute-group {
-    margin-left: 20px;
-}
-
-.rule-group {
-    margin-left: 20px;
-    line-height: 0.5;
-}
-
-hr.style1{
-	border-top: 1px solid #8c8b8b;
 }
