@@ -1,13 +1,11 @@
 import { Action } from './action/action';
 import { Field } from './action/attribute-simple/field/field';
-import { UUID } from 'angular2-uuid';
 
 export class Rule {
 
 	triggerFields: Field[];
 	action: Action;
 	createDate: string;
-	id: string;
 
 	constructor(triggerFields?: any[], action?: Action, createDate?: string) {
 		if (triggerFields) {
@@ -22,10 +20,5 @@ export class Rule {
 			this.action = new Action();
 		}
 		this.createDate = createDate;
-		this.generateUUID();
-	}
-
-	generateUUID() {
-		this.id = UUID.UUID();
 	}
 }
