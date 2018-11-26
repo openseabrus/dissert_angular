@@ -3,22 +3,30 @@
     <h1>Adaptation Rules</h1>
   </div>
 
-  <div *ngIf="groups" class="content">
+  <div *ngIf="rules" class="content">
     <div class="pure-g">
-      <div class="pure-u-23-24 rule" *ngFor="let group of groups; let g = index" @delete>
-        <h3 class="trigger-action" style="margin-bottom: 0;">Trigger - {{group.entity}}</h3>
+      <div class="pure-u-sm-23-24 pure-u-xl-7-24 pure-u-23-24 rule" *ngFor="let rule of rules; let i = index" @delete>
+        <div>
+          <h3 class="trigger-action">Trigger</h3>
+          <div class="rule-content">
+            <p><span class="property">Entity:</span> {{rule.trigger.entity}}</p>
+            <p><span class="property">Attribute:</span> {{rule.trigger.attribute.name}}</p>
+            <p><span class="property">Value:</span> {{rule.trigger.attribute.fields[0].value}}</p>
+          </div>
 
-        <div class="attribute-group" *ngFor="let attribute of group.attributes; let a = index">
-          <p><span style="font-weight: bold;">Attribute</span> {{attribute.name}}</p>
-          <div class="rule-group" *ngFor="let rule of attribute.rules; let last = last; let r = index">
-            <p><span class="property">Value:</span> {{rule.triggerFields[0].value}}{{rule.triggerFields[0].unit ?
-			  rule.triggerFields[0].unit : ''}}</p>
-			  <p><span class="property">Action:</span> Set {{rule.action.entity}}'s {{rule.action.attribute.name}} to {{rule.action.attribute.fields[0].value}}</p>
-			  <button (click)="deleteRule(g, a, r)" class="pure-button pure-button-primary button-error center"><i class="fas fa-trash-alt"
-				  style="padding-right: 10px;"></i> Delete Rule</button>
-            <hr *ngIf="!last" class="style1">
+          <h3 class="trigger-action" style="margin-top: 50px;">Action</h3>
+          <div class="rule-content">
+            <p><span class="property">Entity:</span> {{rule.action.entity ? rule.action.entity : rule.trigger.attribute.fields[0].value + ' (Marker)'}}</p>
+            <p><span class="property">Attribute:</span> {{rule.action.attribute.name}}</p>
+            <p><span class="property">New Value:</span> {{rule.action.attribute.fields[0].value}} {{rule.action.attribute.unit ?
+              rule.action.attribute.unit : ""}}</p>
+            <p><span class="property">Created:</span> {{rule.createDate | date: 'd MMM yyyy, HH:mm'}}</p>
           </div>
         </div>
+        <button (click)="deleteRule(i)" class="pure-button pure-button-primary button-error center"><i class="fas fa-trash-alt"
+            style="padding-right: 10px;"></i> Delete Rule</button>
+        <!-- <app-card
+          [rule]="rule"></app-card> -->
       </div>
     </div>
   </div>

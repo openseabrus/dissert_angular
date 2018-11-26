@@ -112,39 +112,14 @@ app.post("/api/rules", function(req, res) {
 	}
 });
 
-app.delete("/api/rules/:groupid/:attrname/:ruleid", function(req, res) {
-  var groupId = req.params.groupid;
-  var attrName = req.params.attrname;
-  var ruleId = req.params.ruleid;
-  /**
-   * { entity: newRule.entity , 'attributes.name': newRule.attributes[0].name },
-			{ $push: { 'attributes.$[e].rules': newRule.attributes[0].rules[0] } },
-			{ arrayFilters: [ { 'e.name': newRule.attributes[0].name }], upsert: true, returnOriginal: false }, 
-   */
-  db.collection(RULES_COLLECTION).findOneAndUpdate(
-	{ _id: new ObjectID(groupId), 
-		'attributes.name': attrName, 
-		'attributes.rules.id': ruleId},
-	{ $pull: { 'attributes.$[a].rules': { id: ruleId } } },
-	{ arrayFilters: [ { 'a.name': attrName } ], returnOriginal: false},
-	function(error, doc) {
-		if (error) {
-			handleError(res, error.message, error, 400);
-		} else {
-			res.status(200).json(doc);
-		}
-	}
-  )
-  /* db.collection(RULES_COLLECTION).findOne(
-	{ _id: new ObjectID(groupId), 'attributes.name': attrName , 'attributes.rules.id': ruleId },
-	function(error, doc) {
-		if (error) {
-			handleError(res, err.message, err, 100);
-		} else {
-			res.status(200).json(doc);
-		}
-	}
-  ) */
+app.delete("/api/rules/:id", function(req, res) {
+  db.collection(RULES_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete rule");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
 });
 
 
