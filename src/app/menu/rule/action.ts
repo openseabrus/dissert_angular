@@ -1,16 +1,16 @@
-import { EntityAttribute } from '../entities/attribute/entity-attribute';
+import { Attribute } from './attribute/attribute';
 
 export class Action {
 	_id?: string;
 	entity: string;
-	attribute: EntityAttribute;
+	attribute: Attribute;
 
 	constructor(entity?: string, attribute?: any) {
 		this.entity = entity;
 		if (attribute) {
 			this.attribute = attribute;
 		} else {
-			this.attribute = new EntityAttribute();
+			this.attribute = new Attribute();
 		}
 	}
 }
