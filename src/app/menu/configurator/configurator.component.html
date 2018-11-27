@@ -52,7 +52,6 @@
           </div>
         </div>
       </fieldset>
-      <p>{{trigger | json}}</p>
       <fieldset>
         <legend>Action</legend>
 
@@ -96,7 +95,6 @@
           </div>
         </div>
       </fieldset>
-      <p>{{action | json}}</p>
       <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [disabled]="!ruleform.form.valid">
         <i class="far fa-check-circle"></i> Submit
       </button>
