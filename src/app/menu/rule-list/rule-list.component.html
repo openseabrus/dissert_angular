@@ -20,7 +20,10 @@
             <p><span class="property">Attribute:</span> {{rule.action.attribute.name}}</p>
             <p><span class="property">New Value:</span> {{rule.action.attribute.fields[0].value}} {{rule.action.attribute.unit ?
               rule.action.attribute.unit : ""}}</p>
+
+            <br>
             <p><span class="property">Created:</span> {{rule.createDate | date: 'd MMM yyyy, HH:mm'}}</p>
+            <p><span class="property">Priority:</span> {{rule.priority ? rule.priority : 0}}</p>
           </div>
         </div>
         <button (click)="deleteRule(i)" class="pure-button pure-button-primary button-error center"><i class="fas fa-trash-alt"
