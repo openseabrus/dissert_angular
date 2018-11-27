@@ -51,7 +51,7 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/api/rules", function(req, res) {
-  db.collection(RULES_COLLECTION).find({}).toArray(function(err, docs) {
+  db.collection(RULES_COLLECTION).find({}).sort({ priority: 1 }).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get rules.");
     } else {
