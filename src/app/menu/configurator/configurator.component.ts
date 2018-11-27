@@ -69,6 +69,7 @@ export class ConfiguratorComponent implements OnInit {
    */
 	private trigger: Trigger;
 	private action: Action;
+	private priority: number;
 
   /**
    * Point array fetched on database link.
@@ -115,6 +116,7 @@ export class ConfiguratorComponent implements OnInit {
 		this.trigger = new Trigger();
 		this.action = new Action();
 		this.pointer = -1;
+		this.priority = 0;
 	}
 
 	private changePoint(e: any, j: Field) {
@@ -177,7 +179,7 @@ export class ConfiguratorComponent implements OnInit {
 		console.log(this.trigger);
 
 		this.config
-			.createRule(Rule.buildFromElems(this.trigger, this.action))
+			.createRule(Rule.buildFromElems(this.trigger, this.action, this.priority))
 			.subscribe();
 	}
 

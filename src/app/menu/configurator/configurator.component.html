@@ -97,6 +97,18 @@
         </div>
       </fieldset>
       <p>{{action | json}}</p>
+
+      <fieldset>
+        <legend>Rule Priority</legend>
+        <div class="pure-g-">
+          <div class="pure-u-1">
+            <div class="pure-u-23-24">
+              <label for="rule-priority">Priority</label>
+              <input [(ngModel)]="priority" id="rule-priority" name="rule-priority" placeholder="0" type="number" />
+            </div>
+          </div>
+        </div>
+      </fieldset>
       <button (click)="submitRule()" type="submit" class="pure-button pure-button-primary button-success" [disabled]="!ruleform.form.valid">
         <i class="far fa-check-circle"></i> Submit
       </button>
