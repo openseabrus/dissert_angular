@@ -28,7 +28,7 @@ export class ConfiguratorComponent implements OnInit {
 
 
 	private POINT_ENTITY: Entity = {
-		name: null,
+		name: '$database',
 		attributes: [
 			{
 				asAction: true,
