@@ -1,51 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Rule } from './rule';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Trigger } from './trigger';
-import { Action } from './action';
+import { Entity } from '../rule/entity/entity';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RuleService {
-  private rulesURL = '/api/rules';
+export class EntityService {
+  private entitiesURL = '/api/entities';
 
   constructor(private http: HttpClient) { }
 
-  // get("/api/rules")
-  getRules(): Observable<Rule[]> {
+  getEntities(): Observable<Entity[]> {
 	const httpOptions = {
 		headers: new HttpHeaders({
-		'Accept':  'application/json'
+		'Accept': 'application/json'
 		})
 	};
-	return this.http.get<Array<Rule>>(this.rulesURL).pipe(
-		map(obj => obj.map( o => new Rule(o)))
+	return this.http.get<Entity[]>(this.entitiesURL).pipe(
+		catchError(this.handleError)
 	);
   }
 
-  // post("/api/rules")
-  createRule(newRule: Rule): Observable<void | any> {
+  // post("/api/entities")
+  createEntity(newEntity: Entity): Observable<void | any> {
 	const httpOptions = {
 		headers: new HttpHeaders({
 		'Content-Type':  'application/json'
 		})
 	};
-	return this.http.post(this.rulesURL, newRule, httpOptions)
+	console.log(newEntity);
+	return this.http.post(this.entitiesURL, newEntity, httpOptions)
 		.pipe(
 		catchError(this.handleError)
 		);
-		/* return this.http.post(this.rulesURL, newRule)
-               .toPromise()
-               .then(response => response)
-               .catch(this.handleError); */
   }
 
-  deleteRule(_id: string): Observable<{}> {
-	const url = `${this.rulesURL}/${_id}`;
+  deleteEntity(_id: string): Observable<{}> {
+	const url = `${this.entitiesURL}/${_id}`;
 	return this.http.delete(url).pipe(
 		catchError(this.handleError)
 	);

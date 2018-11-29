@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { DatabaseLink } from './database-link';
+import { DatabaseLink } from '../database/database-link';
 import { Observable, throwError } from 'rxjs';
-import { Poi } from './poi';
+import { Poi } from '../database/poi';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({

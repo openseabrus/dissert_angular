@@ -1,5 +1,5 @@
-import { Field } from './field';
 import { UUID } from 'angular2-uuid';
+import { Field } from './field/field';
 
 export class Attribute {
 	_id?: string;

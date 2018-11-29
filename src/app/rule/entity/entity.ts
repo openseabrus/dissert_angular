@@ -1,4 +1,4 @@
-import { Attribute } from '../attribute/attribute';
+import { Attribute } from '../members/attribute/attribute';
 
 export class Entity {
 	_id?: string;

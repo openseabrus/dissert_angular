@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Rule } from '../rule/rule';
-import { Entity } from '../rule/entities/entity';
-import { Attribute } from '../rule/attribute/attribute';
-import { Poi } from '../database-link/poi';
-import { RuleService } from '../rule/rule-service.service';
-import { EntityService } from '../rule/entities/entity-service.service';
-import { DatabaseLinkService } from '../database-link/database-link.service';
-import { DatabaseService } from '../database-link/database.service';
-import { Field } from '../rule/attribute/field';
-import { Trigger } from '../rule/trigger';
-import { Action } from '../rule/action';
+import { Poi } from '../../database/poi';
+import { RuleService } from '../../services/rule-service.service';
+import { EntityService } from '../../services/entity-service.service';
+import { DatabaseLinkService } from '../../services/database-link.service';
+import { DatabaseService } from '../../services/database.service';
 import { Router } from '@angular/router';
+import { Rule } from 'src/app/rule/rule';
+import { Entity } from 'src/app/rule/entity/entity';
+import { Attribute } from 'src/app/rule/members/attribute/attribute';
+import { Field } from 'src/app/rule/members/attribute/field/field';
+import { Trigger } from 'src/app/rule/members/trigger';
+import { Action } from 'src/app/rule/members/action';
 
 @Component({
 	selector: 'app-new-rule',

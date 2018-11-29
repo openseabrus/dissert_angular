@@ -1,5 +1,5 @@
-import { Trigger } from './trigger';
-import { Action } from './action';
+import { Trigger } from './members/trigger';
+import { Action } from './members/action';
 
 export class Rule {
 	_id?: string;

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Entity } from './entity';
+import { Entity } from '../rule/entity/entity';
 
 /**
  * This is a test anotation :D
