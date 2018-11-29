@@ -1,44 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Entity } from './entity';
+import { Rule } from '../rule/rule';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EntityService {
-  private entitiesURL = '/api/entities';
+export class RuleService {
+  private rulesURL = '/api/rules';
 
   constructor(private http: HttpClient) { }
 
-  getEntities(): Observable<Entity[]> {
+  // get("/api/rules")
+  getRules(): Observable<Rule[]> {
 	const httpOptions = {
 		headers: new HttpHeaders({
-		'Accept': 'application/json'
+		'Accept':  'application/json'
 		})
 	};
-	return this.http.get<Entity[]>(this.entitiesURL).pipe(
-		catchError(this.handleError)
+	return this.http.get<Array<Rule>>(this.rulesURL).pipe(
+		map(obj => obj.map( o => new Rule(o)))
 	);
   }
 
-  // post("/api/entities")
-  createEntity(newEntity: Entity): Observable<void | any> {
+  // post("/api/rules")
+  createRule(newRule: Rule): Observable<void | any> {
 	const httpOptions = {
 		headers: new HttpHeaders({
 		'Content-Type':  'application/json'
 		})
 	};
-	console.log(newEntity);
-	return this.http.post(this.entitiesURL, newEntity, httpOptions)
+	return this.http.post(this.rulesURL, newRule, httpOptions)
 		.pipe(
 		catchError(this.handleError)
 		);
+		/* return this.http.post(this.rulesURL, newRule)
+               .toPromise()
+               .then(response => response)
+               .catch(this.handleError); */
   }
 
-  deleteEntity(_id: string): Observable<{}> {
-	const url = `${this.entitiesURL}/${_id}`;
+  deleteRule(_id: string): Observable<{}> {
+	const url = `${this.rulesURL}/${_id}`;
 	return this.http.delete(url).pipe(
 		catchError(this.handleError)
 	);

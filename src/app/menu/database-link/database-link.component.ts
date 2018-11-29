@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { DatabaseLinkService } from './database-link.service';
-import { DatabaseLink } from './database-link';
+import { DatabaseLinkService } from '../../services/database-link.service';
+import { DatabaseLink } from '../../database/database-link';
 import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({

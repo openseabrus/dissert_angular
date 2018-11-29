@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu.component';
 import { RuleListComponent } from './rule-list/rule-list.component';
-import { EntitiesComponent } from './entities/entities/entities.component';
-import { NewEntityComponent } from './entities/new-entity/new-entity.component';
 import { DatabaseLinkComponent } from './database-link/database-link.component';
 import { NewRuleComponent } from './new-rule/new-rule.component';
+import { EntityListComponent } from './entity-list/entity-list.component';
+import { NewEntityComponent } from './new-entity/new-entity.component';
 
 const menuRoutes: Routes = [
   { path: '', redirectTo: '/rules', pathMatch: 'full' },
@@ -23,7 +23,7 @@ const menuRoutes: Routes = [
 		},
 		{
 		path: 'entities',
-		component: EntitiesComponent
+		component: EntityListComponent
 		},
 		{
 		path: 'entities/new',

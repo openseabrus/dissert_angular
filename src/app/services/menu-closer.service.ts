@@ -12,7 +12,7 @@ export class MenuCloserService {
   contentClick$ = this.contentClickSource.asObservable();
 
   contentClick() {
-    this.contentClickSource.next();
+	this.contentClickSource.next();
   }
 
   constructor() { }

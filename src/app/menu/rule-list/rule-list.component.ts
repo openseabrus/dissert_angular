@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Rule } from '../rule/rule';
-import { RuleService } from '../rule/rule-service.service';
-import { EntityService } from '../rule/entities/entity-service.service';
+import { RuleService } from '../../services/rule-service.service';
+import { EntityService } from '../../services/entity-service.service';
 import {
   trigger,
   state,
@@ -11,6 +10,7 @@ import {
   query,
   stagger
 } from '@angular/animations';
+import { Rule } from 'src/app/rule/rule';
 
 @Component({
   selector: 'app-rule-list',

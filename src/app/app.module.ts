@@ -10,22 +10,22 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MenuModule } from './menu/menu.module';
-import { MenuCloserService } from './menu/menu-closer/menu-closer.service';
+import { MenuCloserService } from './services/menu-closer.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PageNotFoundComponent
+	AppComponent,
+	PageNotFoundComponent
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpModule,
-    HttpClientModule,
-    RouterModule,
-    MenuModule,
-    AppRoutingModule
+	BrowserModule,
+	BrowserAnimationsModule,
+	FormsModule,
+	HttpModule,
+	HttpClientModule,
+	RouterModule,
+	MenuModule,
+	AppRoutingModule
   ],
   providers: [MenuCloserService],
   bootstrap: [AppComponent]

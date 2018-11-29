@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Entity } from '../../rule/entities/entity';
-import { Attribute } from '../../rule/attribute/attribute';
-import { EntityService } from '../../rule/entities/entity-service.service';
-import { Field } from '../../rule/attribute/field';
+import { EntityService } from 'src/app/services/entity-service.service';
+import { Entity } from 'src/app/rule/entity/entity';
+import { Attribute } from 'src/app/rule/members/attribute/attribute';
+import { Field } from 'src/app/rule/members/attribute/field/field';
 
 @Component({
 	selector: 'app-new-entity',
