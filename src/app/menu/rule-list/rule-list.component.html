@@ -11,7 +11,7 @@
           <div class="rule-content">
             <p><span class="property">Entity:</span> {{rule.trigger.entity}}</p>
             <p><span class="property">Attribute:</span> {{rule.trigger.attribute.name}}</p>
-            <p><span class="property">Value:</span> {{rule.trigger.attribute.fields[0].value}}</p>
+            <p><span class="property">Value</span> {{rule.trigger.attribute.fields[0].operator}} {{rule.trigger.attribute.fields[0].value}}</p>
           </div>
 
           <h3 class="trigger-action" style="margin-top: 50px;">Action</h3>
