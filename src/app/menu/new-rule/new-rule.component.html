@@ -42,13 +42,13 @@
                   <label for="field-operator-{{i}}">Comparison Operator</label>
                   <select id="field-operator-{{i}}" [(ngModel)]="field.operator" name="field-operator-{{i}}" class="pure-u-1"
                     required>
-                    <option [ngValue]="'eq'">= (Equals)</option>
-                    <option [ngValue]="'neq'">≠ (Not Equal)</option>
-                    <option [ngValue]="'lt'">
-                      < (Less Than)</option> <option [ngValue]="'lte'">≤ (Less Than or Equal)
+                    <option [ngValue]="'EQ'">= (Equals)</option>
+                    <option [ngValue]="'NEQ'">≠ (Not Equal)</option>
+                    <option [ngValue]="'LT'">
+                      < (Less Than)</option> <option [ngValue]="'LTE'">≤ (Less Than or Equal)
                     </option>
-                    <option [ngValue]="'gt'">> (Greater Than)</option>
-                    <option [ngValue]="'gte'">≥ (Greater Than or Equal)</option>
+                    <option [ngValue]="'GT'">> (Greater Than)</option>
+                    <option [ngValue]="'GTE'">≥ (Greater Than or Equal)</option>
                   </select>
                 </div>
               </div>
