@@ -6,27 +6,14 @@ export class Field {
 	type: string;
 	unit?: string;
 	value?: any;
+	operator?: string;
 
-	constructor(name?: string, type?: string, unit?: string, value?: any) {
+	constructor(name?: string, type?: string, unit?: string, value?: any, operator?: string) {
 		this.name = name;
-
-		if (type) {
-			this.type = type;
-		} else {
-			this.type = 'number';
-		}
-
-		if (unit) {
-			this.unit = unit;
-		} else {
-			this.unit = null;
-		}
-
-		if (value) {
-			this.value = value;
-		} else {
-			this.value = null;
-		}
+		this.type = type ? type : 'number';
+		this.unit = unit;
+		this.value = value;
+		this.operator = operator ? operator : 'eq';
 
 		this.id = UUID.UUID();
 	}
