@@ -1,0 +1,8 @@
+export enum Operators {
+	EQUAL_TO = 'EQ',
+	NOT_EQUAL = 'NEQ',
+	LESS_THAN = 'LT',
+	LESS_THAN_OR_EQUAL = 'LTE',
+	GREATER_THAN = 'GT',
+	GREATER_THAN_OR_EQUAL = 'GTE'
+}

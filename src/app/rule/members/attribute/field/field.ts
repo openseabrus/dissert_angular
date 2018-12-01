@@ -1,4 +1,5 @@
 import { UUID } from 'angular2-uuid';
+import { Operators } from './operators.enum';
 
 export class Field {
 	id?: string;
@@ -13,7 +14,7 @@ export class Field {
 		this.type = type ? type : 'number';
 		this.unit = unit;
 		this.value = value;
-		this.operator = operator ? operator : 'eq';
+		this.operator = operator ? operator : Operators.EQUAL_TO;
 
 		this.id = UUID.UUID();
 	}

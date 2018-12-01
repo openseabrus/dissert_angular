@@ -11,6 +11,7 @@ import { Attribute } from 'src/app/rule/members/attribute/attribute';
 import { Field } from 'src/app/rule/members/attribute/field/field';
 import { Trigger } from 'src/app/rule/members/trigger';
 import { Action } from 'src/app/rule/members/action';
+import { Operators } from 'src/app/rule/members/attribute/field/operators.enum';
 
 @Component({
 	selector: 'app-new-rule',
@@ -18,6 +19,8 @@ import { Action } from 'src/app/rule/members/action';
 	styleUrls: ['./new-rule.component.css']
 })
 export class NewRuleComponent implements OnInit {
+
+	private operators;
 
 	private rule: Rule;
 
@@ -79,6 +82,7 @@ export class NewRuleComponent implements OnInit {
 				private router: Router) { }
 
 	ngOnInit() {
+		this.operators = Operators;
 		this.chosenTriggerAttribute = Entity.emptyEntity();
 		this.chosenActionAttribute = Entity.emptyEntity();
 		this.entityService.getEntities().subscribe(res => {
