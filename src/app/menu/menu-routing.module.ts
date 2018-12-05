@@ -7,6 +7,7 @@ import { DatabaseLinkComponent } from './database-link/database-link.component';
 import { NewRuleComponent } from './new-rule/new-rule.component';
 import { EntityListComponent } from './entity-list/entity-list.component';
 import { NewEntityComponent } from './new-entity/new-entity.component';
+import { InitialSettingsComponent } from './initial-settings/initial-settings.component';
 
 const menuRoutes: Routes = [
   { path: '', redirectTo: '/rules', pathMatch: 'full' },
@@ -28,6 +29,10 @@ const menuRoutes: Routes = [
 		{
 		path: 'entities/new',
 		component: NewEntityComponent
+		},
+		{
+			path: 'settings',
+			component: InitialSettingsComponent
 		},
 		{
 		path: 'database',

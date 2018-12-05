@@ -15,7 +15,7 @@ import { MenuCloserService } from './services/menu-closer.service';
 @NgModule({
   declarations: [
 	AppComponent,
-	PageNotFoundComponent
+	PageNotFoundComponent,
   ],
   imports: [
 	BrowserModule,

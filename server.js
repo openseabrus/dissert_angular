@@ -7,6 +7,7 @@ var CONTACTS_COLLECTION = "contacts";
 var RULES_COLLECTION = "rules";
 var ENTITIES_COLLECTION = "entities";
 var DATABASE_COLLECTION = "database";
+var SETTINGS_COLLECTION = "settings";
 
 var app = express();
 app.use(bodyParser.json());
@@ -156,46 +157,6 @@ app.get("/config", function(req, res) {
   }
 )});
 
-/*  "/api/contacts/:id"
- *    GET: find contact by id
- *    PUT: update contact by id
- *    DELETE: deletes contact by id
- */
-
-app.get("/api/contacts/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to get contact");
-    } else {
-      res.status(200).json(doc);
-    }
-  });
-});
-
-app.put("/api/contacts/:id", function(req, res) {
-  var updateDoc = req.body;
-  delete updateDoc._id;
-
-  db.collection(CONTACTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
-    if (err) {
-      handleError(res, err.message, "Failed to update contact");
-    } else {
-      updateDoc._id = req.params.id;
-      res.status(200).json(updateDoc);
-    }
-  });
-});
-
-app.delete("/api/contacts/:id", function(req, res) {
-  db.collection(CONTACTS_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
-    if (err) {
-      handleError(res, err.message, "Failed to delete contact");
-    } else {
-      res.status(200).json(req.params.id);
-    }
-  });
-});
-
 
 app.get("/api/database", function(req, res) {
   db.collection(DATABASE_COLLECTION).findOne({}, (function(err, docs) {
@@ -232,8 +193,35 @@ app.post("/api/database", function(req, res) {
 });
 
 
-app.get("/api/test", function(req, res) {
+app.get("/api/settings", function(req, res) {
+  db.collection(SETTINGS_COLLECTION).findOne({}, (function(err, docs) {
+    if (err) {
+      handleError(res, "Settings Not Found.", "No settings set.", 404);
+    } else if (!docs) {
+      res.status(204).json({});
+    } else {
+      res.status(200).json(docs);
+    }
+  }));
+});
+
+app.put("/api/settings", function(req, res) {
+	var newSettings = req.body;
+	newSettings.setDate = new Date().toLocaleString('en-US', {
+	  timeZone: 'Europe/Lisbon'
+	});
+	delete newSettings._id;
   
+	const operation = {
+		$set: newSettings
+	  };
+	  db.collection(SETTINGS_COLLECTION).updateOne({}, operation, { upsert: true }, function(err, doc) {
+		if (err) {
+		  handleError(res, err.message, "Failed to save new Settings.");
+		} else {
+		  res.status(201).json(doc);
+		}
+	});
 });
 
 // 404 catch 

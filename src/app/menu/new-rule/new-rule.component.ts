@@ -44,7 +44,7 @@ export class NewRuleComponent implements OnInit {
 	};
 	private abstractPoi: Poi = {
 		id: 0,
-		name: 'All POIs, individually',
+		name: 'All POIs',
 		latitude: null,
 		longitude: null,
 		abstractPoi: true
@@ -69,6 +69,15 @@ export class NewRuleComponent implements OnInit {
 					{
 						type: 'number',
 						unit: 'Degrees'
+					}
+				]
+			},
+			{
+				asAction: true,
+				name: 'Color',
+				fields: [
+					{
+						type: 'text'
 					}
 				]
 			}

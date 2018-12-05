@@ -46,6 +46,11 @@ export class MenuComponent implements OnInit, OnDestroy {
 		route: 'entities'
 		},
 		{
+			name: 'Initial Settings',
+			icon: 'fas fa-cog',
+			route: 'settings'
+		},
+		{
 		name: 'Database Link',
 		icon: 'fas fa-database',
 		route: 'database'
