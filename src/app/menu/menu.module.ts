@@ -9,6 +9,7 @@ import { DatabaseLinkComponent } from './database-link/database-link.component';
 import { NewRuleComponent } from './new-rule/new-rule.component';
 import { NewEntityComponent } from './new-entity/new-entity.component';
 import { EntityListComponent } from './entity-list/entity-list.component';
+import { InitialSettingsComponent } from './initial-settings/initial-settings.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { EntityListComponent } from './entity-list/entity-list.component';
 	NewEntityComponent,
 	DatabaseLinkComponent,
 	NewRuleComponent,
-	EntityListComponent
+	EntityListComponent,
+	InitialSettingsComponent
   ]
 })
 export class MenuModule { }
