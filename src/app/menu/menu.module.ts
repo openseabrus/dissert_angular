@@ -14,25 +14,25 @@ import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [
+	imports: [
 		TagInputModule,
 		BrowserAnimationsModule,
 		ReactiveFormsModule,
-	CommonModule,
-	FormsModule,
-	MenuRoutingModule
-  ],
-  declarations: [
-	MenuComponent,
-	RuleListComponent,
-	OnlyActions,
-	OnlyActionAttributes,
-	EntityListComponent,
-	NewEntityComponent,
-	DatabaseLinkComponent,
-	NewRuleComponent,
-	EntityListComponent,
-	InitialSettingsComponent
-  ]
+		CommonModule,
+		FormsModule,
+		MenuRoutingModule
+	],
+	declarations: [
+		MenuComponent,
+		RuleListComponent,
+		OnlyActions,
+		OnlyActionAttributes,
+		EntityListComponent,
+		NewEntityComponent,
+		DatabaseLinkComponent,
+		NewRuleComponent,
+		EntityListComponent,
+		InitialSettingsComponent
+	]
 })
 export class MenuModule { }
