@@ -8,6 +8,7 @@ export class Field {
 	unit?: string;
 	value?: any;
 	operator?: string;
+	available?: string[];
 
 	constructor(name?: string, type?: string, unit?: string, value?: any, operator?: string) {
 		this.name = name;
@@ -15,6 +16,7 @@ export class Field {
 		this.unit = unit;
 		this.value = value;
 		this.operator = operator ? operator : Operators.EQUAL_TO;
+		this.available = [];
 
 		this.id = UUID.UUID();
 	}
