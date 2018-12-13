@@ -4,6 +4,7 @@ export class Entity {
 	_id?: string;
 	name: string;
 	attributes: Attribute[];
+	available?: string[];
 
 	constructor(e: any) {
 		if (e._id) {
