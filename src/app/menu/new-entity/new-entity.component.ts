@@ -19,7 +19,7 @@ export class NewEntityComponent implements OnInit {
 		},
 		{
 			name: 'String',
-			value: 'string'
+			value: 'text'
 		},
 		{
 			name: 'Double',
@@ -28,6 +28,10 @@ export class NewEntityComponent implements OnInit {
 		{
 			name: 'Boolean',
 			value: 'boolean'
+		},
+		{
+			name: 'Custom',
+			value: 'custom'
 		},
 		{
 			name: 'Points from Database',

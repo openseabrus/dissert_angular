@@ -55,11 +55,18 @@
 
               <div class="pure-u-1 pure-u-md-1-2 auto">
                 <div class="pure-u-23-24">
-                  <label for="trigger-value-{{i}}">{{ field.name ? field.name : "Value" }}
-                    {{ field.unit ? "(" + field.unit + ")" : "" }}</label>
-                  <input *ngIf="!field.type.startsWith('$')" [(ngModel)]="field.value" id="trigger-value-{{i}}" name="trigger-value-{{i}}"
-                    class="pure-u-1" placeholder="0" type="{{field.type ? (field.type == 'number' || field.type == 'text' ? field.type : 'number') : 'number'}}"
-                    step="0.0001" required #triggervalue="ngModel" />
+                  <label for="trigger-value-{{i}}">{{ field.name ? field.name : "Value" }} {{ field.unit ? "(" +
+                    field.unit + ")" : "" }}</label>
+                  <ng-container *ngIf="!field.type.startsWith('$')">
+                    <input *ngIf="field.type !== 'custom'" [(ngModel)]="field.value" id="trigger-value-{{i}}" name="trigger-value-{{i}}"
+                      class="pure-u-1" placeholder="0" type="{{field.type ? (field.type == 'number' || field.type == 'text' ? field.type : 'number') : 'number'}}"
+                      step="0.0001" required #triggervalue="ngModel" />
+
+                    <select *ngIf="field.type === 'custom'" [(ngModel)]="field.value" id="trigger-value-{{i}}-a" name="trigger-value-{{i}}"
+                      class="pure-u-1" required #triggervalue3="ngModel">
+                      <option *ngFor="let opt of field.available" [ngValue]="opt">{{opt}}</option>
+                    </select>
+                  </ng-container>
 
                   <select *ngIf="field.type.startsWith('$')" id="trigger-value-{{i}}-select" name="trigger-value-{{i}}"
                     [(ngModel)]="pointer" (ngModelChange)="changePoint($event, field)" class="pure-u-1" required

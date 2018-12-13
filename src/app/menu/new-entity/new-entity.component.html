@@ -64,6 +64,11 @@
                   </select>
                 </div>
 
+                <div *ngIf="field.type === 'custom'" class="pure-u-4-5">
+                  <label for="field-availables-{{i}}-{{j}}">Possible Values</label>
+                  <tag-input [ngModel]="field.available" name="field-availables-{{i}}-{{j}}"></tag-input>
+                </div>
+
                 <div *ngIf="!field.type?.startsWith('$')" class="pure-u-4-5">
                   <label for="field-unit-{{i}}-{{j}}">Value Unit (May be left empty)</label>
                   <input class="pure-u-1" id="field-unit-{{i}}-{{j}}" name="field-unit-{{i}}-{{j}}" [(ngModel)]="field.unit" placeholder="km/h" />
