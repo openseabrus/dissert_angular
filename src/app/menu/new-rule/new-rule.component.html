@@ -117,9 +117,15 @@
               <div class="pure-u-23-24">
                 <label for="action-value-{{i}}">{{ field.name ? field.name : "Value" }}
                   {{ field.unit ? "(" + field.unit + ")" : "" }}</label>
-                <input [(ngModel)]="field.value" id="action-value-{{i}}" name="action-value-{{i}}" class="pure-u-1"
-                  placeholder="0" type="{{field.type ? (field.type == 'number' || field.type == 'text' ? field.type : 'number') : 'number'}}"
-                  step="{{field.type == 'double' ? 0.0001 : 1}}" required #triggervalue="ngModel" />
+                <input *ngIf="field.type !== 'custom'" [(ngModel)]="field.value" id="action-value-{{i}}" name="action-value-{{i}}"
+                  class="pure-u-1" placeholder="0" type="{{field.type ? (field.type == 'number' || field.type == 'text' ? field.type : 'number') : 'number'}}"
+                  step="{{field.type == 'double' ? 0.0001 : 1}}" required #actionvalue="ngModel" />
+
+
+                <select *ngIf="field.type === 'custom'" [(ngModel)]="field.value" id="action-value-{{i}}-a" name="action-value-{{i}}"
+                  class="pure-u-1" required #actionvalue3="ngModel">
+                  <option *ngFor="let opt of field.available" [ngValue]="opt">{{opt}}</option>
+                </select>
               </div>
             </div>
           </div>
