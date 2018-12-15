@@ -80,6 +80,16 @@ export class NewRuleComponent implements OnInit {
 						type: 'text'
 					}
 				]
+			},
+			{
+				asAction: true,
+				name: 'InfoWindow',
+				fields: [
+					{
+						type: 'custom',
+						available: ['Open', 'Closed']
+					}
+				]
 			}
 		]
 	};
@@ -99,7 +109,7 @@ export class NewRuleComponent implements OnInit {
 			this.chosenTrigger = res[0];
 			this.chosenTriggerAttribute = this.chosenTrigger.attributes[0];
 
-			this.actionEntities = JSON.parse(JSON.stringify(res)); // TODO - change this
+			this.actionEntities = JSON.parse(JSON.stringify(res)); // Deep copy
 			this.resetActions();
 		});
 
