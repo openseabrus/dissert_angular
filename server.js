@@ -3,11 +3,13 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
-var CONTACTS_COLLECTION = "contacts";
 var RULES_COLLECTION = "rules";
+var ARMANDA_RULES = "rules_armanda";
 var ENTITIES_COLLECTION = "entities";
 var DATABASE_COLLECTION = "database";
+var ARMANDA_DATABASE = "database_armanda";
 var SETTINGS_COLLECTION = "settings";
+var ARMANDA_SETTINGS = "settings_armanda";
 
 var app = express();
 app.use(bodyParser.json());
@@ -97,6 +99,51 @@ app.delete("/api/rules/:id", function(req, res) {
 });
 
 
+app.get("/api/rules/armanda", function(req, res) {
+  db.collection(ARMANDA_RULES).find({}).sort({ priority: 1 }).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get rules.");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
+});
+
+app.post("/api/rules/armanda", function(req, res) {
+  var newRule = req.body;
+  newRule.createDate = new Date().toLocaleString('en-US', {
+    timeZone: 'Europe/Lisbon'
+  });
+
+  if (!req.body.trigger || !req.body.action) {
+    handleError(res, "Invalid user input", "Must provide a trigger and action.", 400);
+  } else {
+    delete newRule.trigger['attribute']['asAction'];
+    delete newRule.trigger['attribute']['asAction'];
+    delete newRule.action['attribute']['asAction'];
+    // delete newRule.trigger['attribute']['fields'];
+    // delete newRule.action['attribute']['fields'];
+    delete newRule.trigger.operator;
+    db.collection(ARMANDA_RULES).insertOne(newRule, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to create new rule.");
+      } else {
+        res.status(201).json(doc.ops[0]);
+      }
+    });
+  }
+});
+
+app.delete("/api/rules/armanda/:id", function(req, res) {
+  db.collection(ARMANDA_RULES).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete rule");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
+});
+
 
 
 
@@ -147,6 +194,18 @@ app.delete("/api/entities/:id", function(req, res) {
 
 app.get("/config", function(req, res) {
   db.collection(RULES_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get rules.");
+    } else {
+      res.attachment("config.json");
+      res.type("json");
+      res.send(docs);
+    }
+  }
+)});
+
+app.get("/config/armanda", function(req, res) {
+  db.collection(ARMANDA_RULES).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get rules.");
     } else {
@@ -216,6 +275,75 @@ app.put("/api/settings", function(req, res) {
 		$set: newSettings
 	  };
 	  db.collection(SETTINGS_COLLECTION).updateOne({}, operation, { upsert: true }, function(err, doc) {
+		if (err) {
+		  handleError(res, err.message, "Failed to save new Settings.");
+		} else {
+		  res.status(201).json(doc);
+		}
+	});
+});
+
+
+
+
+app.get("/api/database/armanda", function(req, res) {
+  db.collection(ARMANDA_DATABASE).findOne({}, (function(err, docs) {
+    if (err) {
+      handleError(res, "Database Not Found.", "No database set.", 404);
+    } else if (!docs) {
+      res.status(204).json({});
+    } else {
+      res.status(200).json(docs);
+    }
+  }));
+});
+
+app.post("/api/database/armanda", function(req, res) {
+  var newUrl = req.body;
+  newUrl.setDate = new Date().toLocaleString('en-US', {
+    timeZone: 'Europe/Lisbon'
+  });
+
+  if (!newUrl.link) {
+    handleError(res, "Invalid user input", "Must provide a valid link.", 400);
+  } else {
+    const operation = {
+      $set: newUrl
+    }
+    db.collection(ARMANDA_DATABASE).updateOne({}, operation, { upsert: true }, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, "Failed to set a new Database Address.");
+      } else {
+        res.status(201).json(doc);
+      }
+    });
+  }
+});
+
+
+app.get("/api/settings/armanda", function(req, res) {
+  db.collection(ARMANDA_SETTINGS).findOne({}, (function(err, docs) {
+    if (err) {
+      handleError(res, "Settings Not Found.", "No settings set.", 404);
+    } else if (!docs) {
+      res.status(204).json({});
+    } else {
+      res.status(200).json(docs);
+    }
+  }));
+});
+
+app.put("/api/settings/armanda", function(req, res) {
+	var newSettings = req.body;
+	newSettings.setDate = new Date().toLocaleString('en-US', {
+	  timeZone: 'Europe/Lisbon'
+	});
+	delete newSettings._id;
+  
+	const operation = {
+		$set: newSettings
+	  };
+	  db.collection(ARMANDA_SETTINGS).updateOne({}, operation, { upsert: true }, function(err, doc) {
 		if (err) {
 		  handleError(res, err.message, "Failed to save new Settings.");
 		} else {

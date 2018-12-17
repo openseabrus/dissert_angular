@@ -10,23 +10,24 @@ import { catchError } from 'rxjs/operators';
 export class SettingsService {
 
 	private settingsURL = '/api/settings';
+	private armandaURL = '/api/settings/armanda';
 
 	constructor(private http: HttpClient) { }
 
-	getSettings(): Observable<Settings> {
-		return this.http.get<Settings>(this.settingsURL).pipe(
+	getSettings(armanda?: boolean): Observable<Settings> {
+		return this.http.get<Settings>(armanda ? this.armandaURL : this.settingsURL).pipe(
 			catchError(this.handleError)
 		);
 	}
 
-	newSettings(set: Settings): Observable<void | any> {
+	newSettings(set: Settings, armanda?: boolean): Observable<void | any> {
 		const httpOptions = {
 			headers: new HttpHeaders({
 			'Content-Type': 'application/json'
 			})
 		};
 		return this.http
-			.put(this.settingsURL, set, httpOptions)
+			.put(armanda ? this.armandaURL : this.settingsURL, set, httpOptions)
 			.pipe(catchError(this.handleError));
 	  }
 

@@ -9,24 +9,25 @@ import { DatabaseLink } from '../database/database-link';
   providedIn: 'root'
 })
 export class DatabaseLinkService {
-  private databaseURL = '/api/database';
+	private databaseURL = '/api/database';
+	private armandaURL = '/api/database/armanda';
 
   constructor(private http: HttpClient) {}
 
-  getDatabase(): Observable<any> {
+  getDatabase(armanda?: boolean): Observable<any> {
 	return this.http
-		.get<DatabaseLink>(this.databaseURL, { observe: 'response' })
+		.get<DatabaseLink>(armanda ? this.armandaURL : this.databaseURL, { observe: 'response' })
 		.pipe(catchError(this.handleError));
   }
 
-  setDatabase(db: DatabaseLink): Observable<void | any> {
+  setDatabase(db: DatabaseLink, armanda?: boolean): Observable<void | any> {
 	const httpOptions = {
 		headers: new HttpHeaders({
 		'Content-Type': 'application/json'
 		})
 	};
 	return this.http
-		.post(this.databaseURL, db, httpOptions)
+		.post(armanda ? this.armandaURL : this.databaseURL, db, httpOptions)
 		.pipe(catchError(this.handleError));
   }
 

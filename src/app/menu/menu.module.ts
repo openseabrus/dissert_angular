@@ -12,6 +12,9 @@ import { EntityListComponent } from './entity-list/entity-list.component';
 import { InitialSettingsComponent } from './initial-settings/initial-settings.component';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewRuleArmandaComponent } from './armanda/new-rule-armanda/new-rule-armanda.component';
+import { RuleListArmandaComponent } from './armanda/rule-list-armanda/rule-list-armanda.component';
+import { InitialSettingsArmandaComponent } from './armanda/initial-settings-armanda/initial-settings-armanda.component';
 
 @NgModule({
 	imports: [
@@ -32,7 +35,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		DatabaseLinkComponent,
 		NewRuleComponent,
 		EntityListComponent,
-		InitialSettingsComponent
+		InitialSettingsComponent,
+		NewRuleArmandaComponent,
+		RuleListArmandaComponent,
+		InitialSettingsArmandaComponent
 	]
 })
 export class MenuModule { }
