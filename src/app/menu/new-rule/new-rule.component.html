@@ -37,7 +37,7 @@
 
           <div class="pure-u-1">
             <div *ngFor="let field of chosenTriggerAttribute.fields; let i = index">
-              <div class="pure-u-1 pure-u-md-1-2 auto" *ngIf="field.type == 'number'">
+              <div class="pure-u-1 pure-u-md-1-2 auto" *ngIf="field.type == 'number' || field.type == 'double'">
                 <div class="pure-u-23-24">
                   <label for="field-operator-{{i}}">Comparison Operator</label>
                   <select id="field-operator-{{i}}" [(ngModel)]="field.operator" name="field-operator-{{i}}" class="pure-u-1"
