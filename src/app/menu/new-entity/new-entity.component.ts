@@ -22,10 +22,6 @@ export class NewEntityComponent implements OnInit {
 			value: 'text'
 		},
 		{
-			name: 'Double',
-			value: 'double'
-		},
-		{
 			name: 'Boolean',
 			value: 'boolean'
 		},

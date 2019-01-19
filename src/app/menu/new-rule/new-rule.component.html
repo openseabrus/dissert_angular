@@ -132,6 +132,20 @@
         </div>
       </fieldset>
 
+      <div *ngIf="chosenTrigger && chosenTriggerAttribute && chosenTriggerAttribute.fields[0].value">
+        <p><span class="keyword">WHEN</span> {{chosenTrigger.name}}'s <span class="attribute">{{chosenTriggerAttribute.name}}</span>
+          <span class="keyword"> {{chosenTriggerAttribute.fields[0].operator ? chosenTriggerAttribute.fields[0].operator
+            : ''}} </span> {{chosenTriggerAttribute.fields[0].value + (chosenTriggerAttribute.fields[0].unit ? ' ' + chosenTriggerAttribute.fields[0].unit : '')}} <span class="keyword">THEN</span></p>
+      </div>
+
+      <div *ngIf="chosenAction && chosenActionAttribute && chosenActionAttribute.fields[0].value">
+        <p><span class="keyword">THE</span> {{chosenAction.name}}'s <span class="attribute">{{chosenActionAttribute.name}}</span> 
+          <span class="keyword"> WILL BE SET TO </span> {{chosenActionAttribute.fields[0].value + (chosenActionAttribute.fields[0].unit ? ' ' + chosenActionAttribute.fields[0].unit : '')}}</p>
+      </div>
+
+      <!-- const trigger = new Trigger(this.chosenTrigger.name, this.chosenTriggerAttribute);
+		const action = new Action(this.chosenAction.name, this.chosenActionAttribute); -->
+
       <fieldset>
         <legend>Rule Priority</legend>
         <div class="pure-g-">
