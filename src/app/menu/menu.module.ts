@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewRuleArmandaComponent } from './armanda/new-rule-armanda/new-rule-armanda.component';
 import { RuleListArmandaComponent } from './armanda/rule-list-armanda/rule-list-armanda.component';
 import { InitialSettingsArmandaComponent } from './armanda/initial-settings-armanda/initial-settings-armanda.component';
+import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
 	imports: [
@@ -23,7 +24,8 @@ import { InitialSettingsArmandaComponent } from './armanda/initial-settings-arma
 		ReactiveFormsModule,
 		CommonModule,
 		FormsModule,
-		MenuRoutingModule
+		MenuRoutingModule,
+		MatTooltipModule
 	],
 	declarations: [
 		MenuComponent,
