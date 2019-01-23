@@ -93,6 +93,50 @@ export class NewRuleComponent implements OnInit {
 			}
 		]
 	};
+	private NEAREST_ENTITY: Entity = {
+		name: '$nearest',
+		attributes: [
+			{
+				asAction: true,
+				name: 'Opacity',
+				fields: [
+					{
+						type: 'number',
+						unit: '%'
+					}
+				]
+			},
+			{
+				asAction: true,
+				name: 'Rotation',
+				fields: [
+					{
+						type: 'number',
+						unit: 'Degrees'
+					}
+				]
+			},
+			{
+				asAction: true,
+				name: 'Color',
+				fields: [
+					{
+						type: 'text'
+					}
+				]
+			},
+			{
+				asAction: true,
+				name: 'InfoWindow',
+				fields: [
+					{
+						type: 'custom',
+						available: ['Open', 'Closed']
+					}
+				]
+			}
+		]
+	};
 
 	constructor(private config: RuleService,
 				private entityService: EntityService,

@@ -14,7 +14,8 @@
           <div class="pure-u-1">
             <div class="pure-u-1 pure-u-md-1-2 auto">
               <div class="pure-u-23-24">
-                <label for="trigger-entity">Entity <i *ngIf="chosenTrigger && chosenTrigger.description" class="far fa-question-circle" [matTooltip]="chosenTrigger.description" matTooltipPosition="above"></i></label>
+                <label for="trigger-entity">Entity <i *ngIf="chosenTrigger && chosenTrigger.description" class="far fa-question-circle"
+                    [matTooltip]="chosenTrigger.description" matTooltipPosition="above"></i></label>
                 <select id="trigger-entity" name="trigger-entity" [(ngModel)]="chosenTrigger" class="pure-u-1" required
                   (ngModelChange)="changeTriggerEntity($event)" #triggerentity="ngModel">
                   <option *ngFor="let entity of triggerEntities" [ngValue]="entity">{{
@@ -26,8 +27,8 @@
 
             <div class="pure-u-1 pure-u-md-1-2 auto" *ngIf="chosenTrigger && chosenTriggerAttribute">
               <div class="pure-u-23-24">
-                <label for="trigger-entity-property">Entity Attribute <i *ngIf="chosenTriggerAttribute && chosenTriggerAttribute.description" class="far fa-question-circle"
-                  [matTooltip]="chosenTriggerAttribute.description" matTooltipPosition="above"></i></label>
+                <label for="trigger-entity-property">Entity Attribute <i *ngIf="chosenTriggerAttribute && chosenTriggerAttribute.description"
+                    class="far fa-question-circle" [matTooltip]="chosenTriggerAttribute.description" matTooltipPosition="above"></i></label>
                 <select id="trigger-entity-property" name="trigger-entity-property" [(ngModel)]="chosenTriggerAttribute"
                   (ngModelChange)="changeTriggerAttribute($event)" class="pure-u-1" required #triggerattr="ngModel">
                   <option *ngFor="let attribute of chosenTrigger.attributes" [ngValue]="attribute">{{ attribute.name }}</option>
@@ -88,12 +89,15 @@
         <div class="pure-g">
           <div class="pure-u-1 pure-u-md-1-3 auto">
             <div class="pure-u-23-24">
-              <label for="action-entity">Entity  <i *ngIf="chosenAction && chosenAction.description" class="far fa-question-circle" [matTooltip]="chosenAction.description" matTooltipPosition="above"></i></label>
+              <label for="action-entity">Entity <i *ngIf="chosenAction && chosenAction.description" class="far fa-question-circle"
+                  [matTooltip]="chosenAction.description" matTooltipPosition="above"></i></label>
               <select id="action-entity" [(ngModel)]="chosenAction" (ngModelChange)="changeActionEntity($event)" name="action-entity"
                 class="pure-u-1" required #actionentity="ngModel">
                 <option *ngFor="let entity of (actionEntities | onlyActions)" [ngValue]="entity">{{ entity.name }}</option>
                 <option *ngIf="chosenTriggerAttribute.fields && containsDatabase() && chosenTriggerAttribute.fields[0].value"
                   [ngValue]="POINT_ENTITY">{{chosenTriggerAttribute.fields[0].value}} (Marker)</option>
+                <option *ngIf="chosenTriggerAttribute.fields && containsDatabase() && chosenTriggerAttribute.fields[0].value"
+                  [ngValue]="NEAREST_ENTITY">Nearest POI (Marker)</option>
               </select>
               <!-- <button matTooltip="Info about the action" matTooltipPosition="above">
                 Action
@@ -103,8 +107,8 @@
           </div>
           <div class="pure-u-1 pure-u-md-1-3 auto" *ngIf="chosenAction">
             <div class="pure-u-23-24">
-              <label for="action-entity-property">Entity Attribute <i *ngIf="chosenActionAttribute && chosenActionAttribute.description" class="far fa-question-circle"
-                [matTooltip]="chosenActionAttribute.description" matTooltipPosition="above"></i></label>
+              <label for="action-entity-property">Entity Attribute <i *ngIf="chosenActionAttribute && chosenActionAttribute.description"
+                  class="far fa-question-circle" [matTooltip]="chosenActionAttribute.description" matTooltipPosition="above"></i></label>
               <select id="action-entity-property" name="action-entity-property" [(ngModel)]="chosenActionAttribute"
                 class="pure-u-1" required #actionattr="ngModel">
                 <ng-container *ngIf="!showMarkerAttributes()">
