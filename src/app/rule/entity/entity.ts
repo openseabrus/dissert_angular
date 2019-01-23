@@ -4,6 +4,7 @@ export class Entity {
 	_id?: string;
 	name: string;
 	attributes: Attribute[];
+	description?: string;
 
 	constructor(e: any) {
 		if (e._id) {
@@ -11,6 +12,7 @@ export class Entity {
 		}
 		this.name = e.name;
 		this.attributes = e.attributes;
+		this.description = e.description;
 	}
 
 	public static emptyEntity(): Entity {

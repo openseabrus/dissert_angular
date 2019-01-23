@@ -4,10 +4,11 @@ import { Field } from './field/field';
 export class Attribute {
 	_id?: string;
 	name: string;
+	description?: string;
 	asAction?: boolean;
 	fields?: Field[];
 
-	constructor(name?: string, asAction?: boolean, fields?: Field[]) {
+	constructor(name?: string, asAction?: boolean, fields?: Field[], description?: string) {
 		this.asAction = false;
 		if (arguments.length > 0) {
 			this.name = name;
@@ -19,6 +20,8 @@ export class Attribute {
 		} else {
 			this.fields = [new Field()];
 		}
+
+		this.description = description;
 		this._id = UUID.UUID();
 	}
 }
