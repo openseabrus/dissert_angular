@@ -95,6 +95,8 @@ export class NewRuleComponent implements OnInit {
 	};
 	private NEAREST_ENTITY: Entity = {
 		name: '$nearest',
+		description: `This entity is used to refer itself to the nearest POI available in the POI database. This means that the rule will be
+		applied ONLY to the closest POI.`,
 		attributes: [
 			{
 				asAction: true,

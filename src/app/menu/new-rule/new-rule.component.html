@@ -96,7 +96,7 @@
                 <option *ngFor="let entity of (actionEntities | onlyActions)" [ngValue]="entity">{{ entity.name }}</option>
                 <option *ngIf="chosenTriggerAttribute.fields && containsDatabase() && chosenTriggerAttribute.fields[0].value"
                   [ngValue]="POINT_ENTITY">{{chosenTriggerAttribute.fields[0].value}} (Marker)</option>
-                <option *ngIf="chosenTriggerAttribute.fields && containsDatabase() && chosenTriggerAttribute.fields[0].value"
+                <option *ngIf="chosenTriggerAttribute.fields && containsDatabase() && chosenTriggerAttribute.fields[0].value && chosenTriggerAttribute.fields[0].id === 0"
                   [ngValue]="NEAREST_ENTITY">Nearest POI (Marker)</option>
               </select>
               <!-- <button matTooltip="Info about the action" matTooltipPosition="above">
