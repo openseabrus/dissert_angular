@@ -16,6 +16,12 @@
             </div>
           </div>
         </div>
+        <div class="pure-u-4-5">
+          <div class="pure-u-23-24">
+            <label for="entity-description-{{i}}">Entity Description</label>
+            <textarea class="pure-u-1" id="entity-description-{{i}}" name="entity-description-{{i}}" [(ngModel)]="entity.description"></textarea>
+          </div>
+        </div>
       </fieldset>
 
       <div *ngFor="let attribute of entity.attributes; let i = index;">
@@ -32,6 +38,12 @@
             <div class="pure-u-1-5">
               <button (click)="removeAttribute(i)" *ngIf="entity.attributes.length > 1" class="pure-button button-error right"><i
                   class="fas fa-trash-alt"></i></button>
+            </div>
+            <div class="pure-u-4-5">
+              <div class="pure-u-23-24">
+                <label for="attribute-description-{{i}}">Attribute Description</label>
+                <textarea class="pure-u-1" id="attribute-description-{{i}}" name="attribute-description-{{i}}" [(ngModel)]="attribute.description"></textarea>
+              </div>
             </div>
             <div class="pure-u-4-5">
               <div class="pure-u-23-24">
