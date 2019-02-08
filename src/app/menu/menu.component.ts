@@ -54,7 +54,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 				name: 'Database Link',
 				icon: 'fas fa-database',
 				route: 'database'
-			},
+			}/* ,
 			{
 				name: '=========',
 				icon: '',
@@ -74,7 +74,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 				name: 'Armanda: Initial Settings',
 				icon: 'fas fa-cog',
 				route: 'settings/armanda'
-			}
+			} */
 		];
 		this.menuOpened = false;
 	}
