@@ -54,27 +54,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 				name: 'Database Link',
 				icon: 'fas fa-database',
 				route: 'database'
-			}/* ,
-			{
-				name: '=========',
-				icon: '',
-				route: ''
-			},
-			{
-				name: 'Armanda: New Rule',
-				icon: 'fas fa-plus',
-				route: 'rules/new/armanda'
-			},
-			{
-				name: 'Armanda: Rules',
-				icon: 'fas fa-check',
-				route: 'rules/armanda'
-			},
-			{
-				name: 'Armanda: Initial Settings',
-				icon: 'fas fa-cog',
-				route: 'settings/armanda'
-			} */
+			}
 		];
 		this.menuOpened = false;
 	}

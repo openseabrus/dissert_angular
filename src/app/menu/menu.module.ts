@@ -12,10 +12,8 @@ import { EntityListComponent } from './entity-list/entity-list.component';
 import { InitialSettingsComponent } from './initial-settings/initial-settings.component';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NewRuleArmandaComponent } from './armanda/new-rule-armanda/new-rule-armanda.component';
-import { RuleListArmandaComponent } from './armanda/rule-list-armanda/rule-list-armanda.component';
-import { InitialSettingsArmandaComponent } from './armanda/initial-settings-armanda/initial-settings-armanda.component';
 import { MatTooltipModule } from '@angular/material';
+import { HttpClientJsonpModule } from '@angular/common/http';
 
 @NgModule({
 	imports: [
@@ -25,7 +23,8 @@ import { MatTooltipModule } from '@angular/material';
 		CommonModule,
 		FormsModule,
 		MenuRoutingModule,
-		MatTooltipModule
+		MatTooltipModule,
+		HttpClientJsonpModule
 	],
 	declarations: [
 		MenuComponent,
@@ -37,10 +36,7 @@ import { MatTooltipModule } from '@angular/material';
 		DatabaseLinkComponent,
 		NewRuleComponent,
 		EntityListComponent,
-		InitialSettingsComponent,
-		NewRuleArmandaComponent,
-		RuleListArmandaComponent,
-		InitialSettingsArmandaComponent
+		InitialSettingsComponent
 	]
 })
 export class MenuModule { }
