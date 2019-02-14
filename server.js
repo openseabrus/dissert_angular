@@ -4,12 +4,9 @@ var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
 var RULES_COLLECTION = "rules";
-var ARMANDA_RULES = "rules_armanda";
 var ENTITIES_COLLECTION = "entities";
 var DATABASE_COLLECTION = "database";
-var ARMANDA_DATABASE = "database_armanda";
 var SETTINGS_COLLECTION = "settings";
-var ARMANDA_SETTINGS = "settings_armanda";
 
 var app = express();
 app.use(bodyParser.json());
@@ -99,52 +96,6 @@ app.delete("/api/rules/:id", function(req, res) {
 });
 
 
-app.get("/api/rules/armanda", function(req, res) {
-  db.collection(ARMANDA_RULES).find({}).sort({ priority: 1 }).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get rules.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
-
-app.post("/api/rules/armanda", function(req, res) {
-  var newRule = req.body;
-  newRule.createDate = new Date().toLocaleString('en-US', {
-    timeZone: 'Europe/Lisbon'
-  });
-
-  if (!req.body.trigger || !req.body.action) {
-    handleError(res, "Invalid user input", "Must provide a trigger and action.", 400);
-  } else {
-    delete newRule.trigger['attribute']['asAction'];
-    delete newRule.trigger['attribute']['asAction'];
-    delete newRule.action['attribute']['asAction'];
-    // delete newRule.trigger['attribute']['fields'];
-    // delete newRule.action['attribute']['fields'];
-    delete newRule.trigger.operator;
-    db.collection(ARMANDA_RULES).insertOne(newRule, function(err, doc) {
-      if (err) {
-        handleError(res, err.message, "Failed to create new rule.");
-      } else {
-        res.status(201).json(doc.ops[0]);
-      }
-    });
-  }
-});
-
-app.delete("/api/rules/armanda/:id", function(req, res) {
-  db.collection(ARMANDA_RULES).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
-    if (err) {
-      handleError(res, err.message, "Failed to delete rule");
-    } else {
-      res.status(200).json(req.params.id);
-    }
-  });
-});
-
-
 
 
 /*  "/api/entities"
@@ -194,18 +145,6 @@ app.delete("/api/entities/:id", function(req, res) {
 
 app.get("/config", function(req, res) {
   db.collection(RULES_COLLECTION).find({}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get rules.");
-    } else {
-      res.attachment("config.json");
-      res.type("json");
-      res.send(docs);
-    }
-  }
-)});
-
-app.get("/config/armanda", function(req, res) {
-  db.collection(ARMANDA_RULES).find({}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get rules.");
     } else {
