@@ -27,8 +27,6 @@ export class DatabaseService {
 			// The response body may contain clues as to what went wrong,
 			console.error(error);
 		}
-		// return an observable with a user-facing error message
-		console.error(error);
 		return throwError('Something bad happened; please try again later.');
-	  }
+	}
 }

@@ -8,9 +8,6 @@ import { NewRuleComponent } from './new-rule/new-rule.component';
 import { EntityListComponent } from './entity-list/entity-list.component';
 import { NewEntityComponent } from './new-entity/new-entity.component';
 import { InitialSettingsComponent } from './initial-settings/initial-settings.component';
-import { NewRuleArmandaComponent } from './armanda/new-rule-armanda/new-rule-armanda.component';
-import { RuleListArmandaComponent } from './armanda/rule-list-armanda/rule-list-armanda.component';
-import { InitialSettingsArmandaComponent } from './armanda/initial-settings-armanda/initial-settings-armanda.component';
 
 const menuRoutes: Routes = [
   { path: '', redirectTo: '/rules', pathMatch: 'full' },
@@ -40,18 +37,6 @@ const menuRoutes: Routes = [
 		{
 		path: 'database',
 		component: DatabaseLinkComponent
-		},
-		{
-		path: 'rules/new/armanda',
-		component: NewRuleArmandaComponent
-		},
-		{
-		path: 'rules/armanda',
-		component: RuleListArmandaComponent
-		},
-		{
-		path: 'settings/armanda',
-		component: InitialSettingsArmandaComponent
 		}
 	]
   }

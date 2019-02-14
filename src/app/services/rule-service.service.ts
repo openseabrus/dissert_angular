@@ -10,30 +10,29 @@ import { Rule } from '../rule/rule';
 })
 export class RuleService {
 	private rulesURL = '/api/rules';
-	private armandaURL = '/api/rules/armanda';
 
 	constructor(private http: HttpClient) { }
 
 	// get("/api/rules")
-	getRules(armanda?: boolean): Observable<Rule[]> {
+	getRules(): Observable<Rule[]> {
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Accept': 'application/json'
 			})
 		};
-		return this.http.get<Array<Rule>>(armanda ? this.armandaURL : this.rulesURL).pipe(
+		return this.http.get<Array<Rule>>(this.rulesURL).pipe(
 			map(obj => obj.map(o => new Rule(o)))
 		);
 	}
 
 	// post("/api/rules")
-	createRule(newRule: Rule, armanda?: boolean): Observable<void | any> {
+	createRule(newRule: Rule): Observable<void | any> {
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Content-Type': 'application/json'
 			})
 		};
-		return this.http.post(armanda ? this.armandaURL : this.rulesURL, newRule, httpOptions)
+		return this.http.post(this.rulesURL, newRule, httpOptions)
 			.pipe(
 				catchError(this.handleError)
 			);
@@ -43,8 +42,8 @@ export class RuleService {
                .catch(this.handleError); */
 	}
 
-	deleteRule(_id: string, armanda?: boolean): Observable<{}> {
-		const url = `${armanda ? this.armandaURL : this.rulesURL}/${_id}`;
+	deleteRule(_id: string): Observable<{}> {
+		const url = `${this.rulesURL}/${_id}`;
 		return this.http.delete(url).pipe(
 			catchError(this.handleError)
 		);
