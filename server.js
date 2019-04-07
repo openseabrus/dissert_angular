@@ -19,7 +19,7 @@ app.use(express.static(distDir));
 var db;
 
 // Connect to the database before starting the application server.
-const mongoURL = "mongodb://heroku_4t9z12tp:ukpmc9ledtliv3objkcbrv2ds4@ds263571.mlab.com:63571/heroku_4t9z12tp";
+const mongoURL = "**REMOVED**";
 mongodb.MongoClient.connect(process.env.MONGODB_URI || mongoURL, function (err, client) {
   if (err) {
     console.log(err);
